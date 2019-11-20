@@ -5,7 +5,7 @@ class PraiseModal
     token = ENV["slack_bot_auth"]
     begin
       Rails.logger.info("Opening praise modal")
-      file = File.read('dialog.json')
+      file = File.read('assets/dialog.json')
       options = {
         :body => {
           token: token,
