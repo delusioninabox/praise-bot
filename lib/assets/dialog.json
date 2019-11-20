@@ -1,8 +1,8 @@
 {
   "callback_id": "submit_praise",
-  "title": ":raised_hands: Praise Your Team! :raised_hands:",
-  "submit_label": "Send Praise! :rocket:",
-  "elements": [
+  "title": ":clap: Praise Your Team!",
+  "submit_label": "Praise!",
+  "blocks": [
     {
       "type": "section",
       "block_id": "section678",
