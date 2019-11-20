@@ -9,5 +9,9 @@ class  Api::PraiseController < ApplicationController
       # trigger_id sent by /praise
       PraiseModal.open(params[:trigger_id])
     end
+  when params[:payload][:trigger_id]
+    # trigger_id sent by action
+    PraiseModal.open(params[:payload][:trigger_id])
+  end
   end
 end
