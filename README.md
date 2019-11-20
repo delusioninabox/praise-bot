@@ -1,24 +1,27 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby Version:
+Rails Version:
 
-Things you may want to cover:
+## Installing Repo
+Run `bundle install`
+Run `rake db:setup && db:migrate`
+TBD
 
-* Ruby version
+## Adding To Heroku
+Deploy your app to Heroku or another site.
 
-* System dependencies
+## Adding To Slack
+Create a new App to your workspace for Praise Bot.
 
-* Configuration
+### The Bot
+Add a bot user under Features & Functionality. Then go to `OAuth & Permissions` to find your bot's auth key.
 
-* Database creation
+Run `bundle exec figaro install` to generate a `config/application.yml` file.
 
-* Database initialization
+Add your ENV variables to this file locally:
+`slack_bot_auth: xoxb-xxxxxxx-xxxxxx-xxxxxx`
 
-* How to run the test suite
+Replace with your keys. Add these in your deployed environment also.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+_Do NOT commit this file._

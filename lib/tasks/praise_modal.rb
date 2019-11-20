@@ -2,7 +2,7 @@ class PraiseModal
   require 'json'
 
   def self.open(trigger_id)
-    token = ENV["BOT_AUTH"]
+    token = ENV["slack_bot_auth"]
     begin
       Rails.logger.info("Opening praise modal")
       file = File.read('dialog.json')

@@ -5,15 +5,13 @@ class  Api::PraiseController < ApplicationController
     # First check if Slack validating
     # Or sending information to process
     challenge = params[:challenge]
-    if challenge
+    case
+    when params[:challenge]
       # Verify to Slack
-      render :json => {challenge: challenge}, :status => :ok
-    elsif token
+      render :json => {challenge: params[:challenge]}, :status => :ok
+    when params[:trigger_id]
       # If Open Modal Trigger
-      trigger_id = params[:trigger_id]
-      if trigger_id
-        PraiseModal.open(trigger_id)
-      end
+      PraiseModal.open(params[:trigger_id])
     end
   end
 end
