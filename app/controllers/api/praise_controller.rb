@@ -1,3 +1,5 @@
+require 'praise_modal'
+
 class  Api::PraiseController < ApplicationController
   skip_before_action :verify_authenticity_token
 
