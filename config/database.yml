@@ -20,5 +20,4 @@ test:
 
 production:
   <<: *default
-  database: praisebot_production
   pool: <%= ENV["DB_POOL"] || ENV['RAILS_MAX_THREADS'] || 5 %>
