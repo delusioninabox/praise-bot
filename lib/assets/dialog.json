@@ -1,7 +1,14 @@
 {
   "callback_id": "submit_praise",
   "title": ":clap: Praise Your Team!",
-  "submit_label": "Praise!",
+  "submit_label": "Praise!&nbsp;:rocket:",
+  "elements": [
+    {
+      "type": "text",
+      "label": "*Short & Sweet, They:* (headline)",
+      "name": "headline"
+    }
+  ],
   "blocks": [
     {
       "type": "section",
@@ -58,17 +65,6 @@
             "value": "praying"
           }
         ]
-      }
-    },
-    {
-      "type": "input",
-      "element": {
-        "type": "plain_text_input"
-      },
-      "label": {
-        "type": "plain_text",
-        "text": "In a few words: (headline)",
-        "emoji": true
       }
     },
     {
