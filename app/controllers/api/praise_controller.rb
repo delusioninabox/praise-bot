@@ -6,7 +6,7 @@ class  Api::PraiseController < ApplicationController
   def create
     # First check if Slack validating
     # Or sending information to process
-    challenge = params[:challenge]
+    puts params.to_json
     case
     when params[:challenge]
       # Verify to Slack
