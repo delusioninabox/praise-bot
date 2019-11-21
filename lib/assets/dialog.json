@@ -12,13 +12,13 @@
   "blocks": [
     {
       "type": "section",
-      "block_id": "section678",
+      "block_id": "user_block",
       "text": {
         "type": "mrkdwn",
         "text": "*I want to praise:*"
       },
       "accessory": {
-        "action_id": "text1234",
+        "action_id": "users",
         "type": "multi_users_select",
         "placeholder": {
           "type": "plain_text",
@@ -30,20 +30,20 @@
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": "*Because they are...*"
+        "text": "*Choose an emoji:* (displays with your headline)"
       },
       "accessory": {
         "type": "static_select",
         "placeholder": {
           "type": "plain_text",
-          "text": "Select an item",
+          "text": "Select an emoji",
           "emoji": true
         },
         "options": [
           {
             "text": {
               "type": "plain_text",
-              "text": "🎉 amazing!",
+              "text": "🎉",
               "emoji": true
             },
             "value": "tada"
@@ -51,7 +51,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "🤗 helpful",
+              "text": "🤗",
               "emoji": true
             },
             "value": "hugging"
@@ -59,10 +59,58 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "🙏 a lifesaver",
+              "text": "🙏",
               "emoji": true
             },
             "value": "praying"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🔥",
+              "emoji": true
+            },
+            "value": "fire"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "💥",
+              "emoji": true
+            },
+            "value": "boom"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🙌",
+              "emoji": true
+            },
+            "value": "raised_hands"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🌟",
+              "emoji": true
+            },
+            "value": "star2"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "✨",
+              "emoji": true
+            },
+            "value": "sparkles"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "❤",
+              "emoji": true
+            },
+            "value": "heart"
           }
         ]
       }
@@ -95,7 +143,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Courage",
+              "text": "💪 Courage",
               "emoji": true
             },
             "value": "courage"
@@ -106,12 +154,12 @@
               "text": "Creativity",
               "emoji": true
             },
-            "value": "creativity"
+            "value": "🧠 creativity"
           },
           {
             "text": {
               "type": "plain_text",
-              "text": "Empathy",
+              "text": "❤ Empathy",
               "emoji": true
             },
             "value": "empathy"
@@ -119,7 +167,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Humility",
+              "text": "😇 Humility",
               "emoji": true
             },
             "value": "humility"
@@ -130,7 +178,7 @@
               "text": "Passion",
               "emoji": true
             },
-            "value": "passion"
+            "value": "🌟 passion"
           }
         ]
       }
@@ -143,7 +191,7 @@
         "multiline": true,
         "placeholder": {
           "type": "plain_text",
-          "text": "Tell us more! (optional)"
+          "text": "Tell us more!"
         }
       },
       "label": {
