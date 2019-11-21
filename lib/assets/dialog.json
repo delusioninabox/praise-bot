@@ -1,8 +1,14 @@
 {
   "type": "modal",
   "callback_id": "submit_praise",
-  "title": ":raised_hands: Praise Your Team! :raised_hands:",
-  "submit_label": "Send Praise! :rocket:",
+  "title": {
+    "type": "plain_text",
+    "text": ":raised_hands: Praise Your Team! :raised_hands:"
+  },
+  "submit": {
+      "type": "plain_text",
+      "text": "Send Praise! :rocket:"
+  },
   "blocks": [
     {
       "type": "section",
