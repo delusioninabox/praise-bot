@@ -1,4 +1,5 @@
 {
+  "type": "modal",
   "callback_id": "submit_praise",
   "title": ":raised_hands: Praise Your Team! :raised_hands:",
   "submit_label": "Send Praise! :rocket:",
