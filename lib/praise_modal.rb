@@ -20,9 +20,9 @@ class PraiseModal
       }
       url = 'https://slack.com/api/views.open'
       Rails.logger.info("Sending to Slack...")
-      puts options.to_json
+      puts options.as_json
       response = HTTParty.post(url, options)
-      puts response.to_json
+      puts response.as_json
     rescue => e
       puts e
     end
