@@ -3,11 +3,11 @@
   "callback_id": "submit_praise",
   "title": {
     "type": "plain_text",
-    "text": "Praise Your Team!"
+    "text": "Give kudos! :clap:"
   },
   "submit": {
       "type": "plain_text",
-      "text": "Praise&nbsp;:rocket:"
+      "text": "Submit :rocket:"
   },
   "blocks": [
     {
@@ -153,22 +153,6 @@
       "hint": {
         "type": "plain_text",
         "text": "Be specific about what they did that was so awesome!"
-      }
-    },
-    {
-      "type": "input",
-      "element": {
-        "type": "channels_select",
-        "placeholder": {
-          "type": "plain_text",
-          "text": "Select a channel",
-          "emoji": true
-        }
-      },
-      "label": {
-        "type": "plain_text",
-        "text": "Share this to:",
-        "emoji": true
       }
     }
   ]
