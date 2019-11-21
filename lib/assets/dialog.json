@@ -3,11 +3,11 @@
   "callback_id": "submit_praise",
   "title": {
     "type": "plain_text",
-    "text": ":raised_hands: Praise Your Team! :raised_hands:"
+    "text": "Praise Your Team!"
   },
   "submit": {
       "type": "plain_text",
-      "text": "Send Praise! :rocket:"
+      "text": "Praise&nbsp;:rocket:"
   },
   "blocks": [
     {
