@@ -1,170 +1,168 @@
 {
-  "view": {
-    "callback_id": "submit_praise",
-    "title": ":raised_hands: Praise Your Team! :raised_hands:",
-    "submit_label": "Send Praise! :rocket:",
-    "blocks": [
-      {
-        "type": "section",
-        "block_id": "section678",
-        "text": {
-          "type": "mrkdwn",
-          "text": "*I want to praise:*"
-        },
-        "accessory": {
-          "action_id": "text1234",
-          "type": "multi_users_select",
-          "placeholder": {
-            "type": "plain_text",
-            "text": "Select user(s)"
-          }
-        }
+  "callback_id": "submit_praise",
+  "title": ":raised_hands: Praise Your Team! :raised_hands:",
+  "submit_label": "Send Praise! :rocket:",
+  "blocks": [
+    {
+      "type": "section",
+      "block_id": "section678",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*I want to praise:*"
       },
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": "*Because they are...*"
-        },
-        "accessory": {
-          "type": "static_select",
-          "placeholder": {
-            "type": "plain_text",
-            "text": "Select an item",
-            "emoji": true
-          },
-          "options": [
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "🎉 amazing!",
-                "emoji": true
-              },
-              "value": "tada"
-            },
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "🤗 helpful",
-                "emoji": true
-              },
-              "value": "hugging"
-            },
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "🙏 a lifesaver",
-                "emoji": true
-              },
-              "value": "praying"
-            }
-          ]
-        }
-      },
-      {
-        "type": "input",
-        "element": {
-          "type": "plain_text_input"
-        },
-        "label": {
+      "accessory": {
+        "action_id": "text1234",
+        "type": "multi_users_select",
+        "placeholder": {
           "type": "plain_text",
-          "text": "In a few words: (headline)",
-          "emoji": true
-        }
-      },
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": "*They exhibited:*"
-        },
-        "accessory": {
-          "type": "multi_static_select",
-          "placeholder": {
-            "type": "plain_text",
-            "text": "Select value(s)",
-            "emoji": true
-          },
-          "options": [
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "Courage",
-                "emoji": true
-              },
-              "value": "courage"
-            },
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "Creativity",
-                "emoji": true
-              },
-              "value": "creativity"
-            },
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "Empathy",
-                "emoji": true
-              },
-              "value": "empathy"
-            },
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "Humility",
-                "emoji": true
-              },
-              "value": "humility"
-            },
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "Passion",
-                "emoji": true
-              },
-              "value": "passion"
-            }
-          ]
-        }
-      },
-      {
-        "type": "input",
-        "element": {
-          "type": "plain_text_input",
-          "action_id": "ml_input",
-          "multiline": true,
-          "placeholder": {
-            "type": "plain_text",
-            "text": "Tell us more! (optional)"
-          }
-        },
-        "label": {
-          "type": "plain_text",
-          "text": "Details"
-        },
-        "hint": {
-          "type": "plain_text",
-          "text": "Be specific about what they did that was so awesome!"
-        }
-      },
-      {
-        "type": "input",
-        "element": {
-          "type": "channels_select",
-          "placeholder": {
-            "type": "plain_text",
-            "text": "Select a channel",
-            "emoji": true
-          }
-        },
-        "label": {
-          "type": "plain_text",
-          "text": "Share this to:",
-          "emoji": true
+          "text": "Select user(s)"
         }
       }
-    ]
-  }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Because they are...*"
+      },
+      "accessory": {
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select an item",
+          "emoji": true
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🎉 amazing!",
+              "emoji": true
+            },
+            "value": "tada"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🤗 helpful",
+              "emoji": true
+            },
+            "value": "hugging"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🙏 a lifesaver",
+              "emoji": true
+            },
+            "value": "praying"
+          }
+        ]
+      }
+    },
+    {
+      "type": "input",
+      "element": {
+        "type": "plain_text_input"
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "In a few words: (headline)",
+        "emoji": true
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*They exhibited:*"
+      },
+      "accessory": {
+        "type": "multi_static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select value(s)",
+          "emoji": true
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Courage",
+              "emoji": true
+            },
+            "value": "courage"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Creativity",
+              "emoji": true
+            },
+            "value": "creativity"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Empathy",
+              "emoji": true
+            },
+            "value": "empathy"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Humility",
+              "emoji": true
+            },
+            "value": "humility"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Passion",
+              "emoji": true
+            },
+            "value": "passion"
+          }
+        ]
+      }
+    },
+    {
+      "type": "input",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "ml_input",
+        "multiline": true,
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Tell us more! (optional)"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Details"
+      },
+      "hint": {
+        "type": "plain_text",
+        "text": "Be specific about what they did that was so awesome!"
+      }
+    },
+    {
+      "type": "input",
+      "element": {
+        "type": "channels_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select a channel",
+          "emoji": true
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Share this to:",
+        "emoji": true
+      }
+    }
+  ]
 }

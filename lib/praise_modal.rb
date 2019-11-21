@@ -10,7 +10,7 @@ class PraiseModal
         :body => {
           :token => token,
           :trigger_id => trigger_id,
-          :dialog => JSON.parse(file)
+          :view => JSON.parse(file)
         }.to_json,
         :headers => {
           'Content-Type' => 'application/json; charset=utf-8',
