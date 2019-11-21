@@ -18,7 +18,7 @@ class PraiseModal
           'Authorization' => "Bearer #{token}"
         }
       }
-      url = 'https://slack.com/api/dialog.open'
+      url = 'https://slack.com/api/views.open'
       Rails.logger.info("Sending to Slack...")
       puts options.to_json
       response = HTTParty.post(url, options)

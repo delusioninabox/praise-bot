@@ -10,7 +10,7 @@ Send `dialog` (below)
   "title": ":raised_hands: Praise Your Team! :raised_hands:",
   "submit_label": "Send Praise! :rocket:",
   "state": "--",
-  "elements": [
+  "blocks": [
     {
       "type": "section",
       "block_id": "section678",
