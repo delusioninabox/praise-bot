@@ -15,7 +15,7 @@
       "block_id": "user_block",
       "text": {
         "type": "mrkdwn",
-        "text": "*I want to praise:*"
+        "text": "I want to praise:"
       },
       "accessory": {
         "action_id": "users",
