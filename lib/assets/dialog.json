@@ -15,7 +15,7 @@
       "block_id": "user_block",
       "text": {
         "type": "mrkdwn",
-        "text": "I want to praise:"
+        "text": "*I want to praise:*"
       },
       "accessory": {
         "action_id": "users",
@@ -33,7 +33,7 @@
       },
       "label": {
         "type": "plain_text",
-        "text": "*In a few words:*",
+        "text": "In a few words:",
         "emoji": true
       }
     },
@@ -41,7 +41,7 @@
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": "*Choose an emoji:* (displays with your headline)"
+        "text": "*Choose an emoji:* (displays with above text)"
       },
       "accessory": {
         "type": "static_select",
