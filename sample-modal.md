@@ -10,7 +10,7 @@ Send `dialog` (below)
   "title": ":raised_hands: Praise Your Team! :raised_hands:",
   "submit_label": "Send Praise! :rocket:",
   "state": "--",
-  "elements": [
+  "blocks": [
     {
       "type": "section",
       "block_id": "section678",
@@ -173,5 +173,75 @@ Send `dialog` (below)
       }
     }
   ]
+}
+```
+
+## Sample Response
+Type `view_submission` is when the submit button is hit.
+Type `block_actions` will also run when the form is updated.
+```
+{
+  "type": "view_submission",
+  "team": {
+    "id": "XXXXXXXXX",
+    "domain": "testslack"
+  },
+  "user": {
+    "id": "XXXXXXXXX",
+    "username": "laura",
+    "name": "laura",
+    "team_id": "XXXXXXXXX"
+  },
+  "api_app_id": "XXXXXXXXX",
+  "token": "XXXXXXXXX",
+  "trigger_id": "XXXXXXXXX.XXXXXXXXX.XXXXXXXXXXXXXXXXXX",
+  "view": {
+    "id": "XXXXXXXXX",
+    "team_id": "XXXXXXXXX",
+    "type": "modal",
+    "blocks": [
+      // ...
+      // same as in view.open
+      // ...
+    ],
+    "private_metadata": "",
+    "callback_id": "submit_praise",
+    "state": {
+      "values": {
+        "headline_block": { // block_id
+          "headline": { // action_id
+            "type": "plain_text_input",
+            "value": "Test Headline"
+          }
+        },
+        "details_block": { // block_id
+          "details": { // action_id
+            "type": "plain_text_input",
+            "value": "Here are some details!"
+          }
+        }
+      }
+    },
+    "hash": "XXXXXXXXX.XXXXXXXXX",
+    "title": {
+      "type": "plain_text",
+      "text": "Give kudos! :clap:",
+      "emoji": true
+    },
+    "clear_on_close": false,
+    "notify_on_close": false,
+    "close": null,
+    "submit": {
+      "type": "plain_text",
+      "text": "Submit :rocket:",
+      "emoji": true
+    },
+    "previous_view_id": null,
+    "root_view_id": "XXXXXXXXX",
+    "app_id": "XXXXXXXXX",
+    "external_id": "",
+    "app_installed_team_id": "XXXXXXXXX",
+    "bot_id": "XXXXXXXXX"
+  }
 }
 ```

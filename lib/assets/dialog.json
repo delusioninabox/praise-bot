@@ -1,0 +1,214 @@
+{
+  "type": "modal",
+  "callback_id": "submit_praise",
+  "title": {
+    "type": "plain_text",
+    "text": "Give kudos! :clap:"
+  },
+  "submit": {
+      "type": "plain_text",
+      "text": "Submit :rocket:"
+  },
+  "blocks": [
+    {
+      "type": "section",
+      "block_id": "user_block",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*I want to praise:*"
+      },
+      "accessory": {
+        "action_id": "users",
+        "type": "multi_users_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select user(s)"
+        }
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "headline_block",
+      "element": {
+        "action_id": "headline",
+        "type": "plain_text_input"
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "In a few words:",
+        "emoji": true
+      }
+    },
+    {
+      "type": "section",
+      "block_id": "emoji_block",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Choose an emoji:* (displays with above text)"
+      },
+      "accessory": {
+        "action_id": "emoji",
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select an emoji",
+          "emoji": true
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🎉",
+              "emoji": true
+            },
+            "value": "tada"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🤗",
+              "emoji": true
+            },
+            "value": "hugging"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🙏",
+              "emoji": true
+            },
+            "value": "praying"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🔥",
+              "emoji": true
+            },
+            "value": "fire"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "💥",
+              "emoji": true
+            },
+            "value": "boom"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🙌",
+              "emoji": true
+            },
+            "value": "raised_hands"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🌟",
+              "emoji": true
+            },
+            "value": "star2"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "✨",
+              "emoji": true
+            },
+            "value": "sparkles"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "❤️",
+              "emoji": true
+            },
+            "value": "heart"
+          }
+        ]
+      }
+    },
+    {
+      "type": "section",
+      "block_id": "value_block",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*They exhibited:*"
+      },
+      "accessory": {
+        "action_id": "values",
+        "type": "multi_static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select value(s)",
+          "emoji": true
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "💪 Courage",
+              "emoji": true
+            },
+            "value": "courage"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🧠 Creativity",
+              "emoji": true
+            },
+            "value": "creativity"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "❤ Empathy",
+              "emoji": true
+            },
+            "value": "empathy"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "😇 Humility",
+              "emoji": true
+            },
+            "value": "humility"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "🌟 Passion",
+              "emoji": true
+            },
+            "value": "passion"
+          }
+        ]
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "details_block",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "details",
+        "multiline": true,
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Tell us more!"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Details"
+      },
+      "hint": {
+        "type": "plain_text",
+        "text": "Be specific about what they did that was so awesome!"
+      }
+    }
+  ]
+}
