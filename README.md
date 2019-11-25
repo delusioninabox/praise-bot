@@ -21,7 +21,11 @@ Run `bundle exec figaro install` to generate a `config/application.yml` file.
 
 Add your ENV variables to this file locally:
 `slack_bot_auth: xoxb-xxxxxxx-xxxxxx-xxxxxx`
+Replace the above value with your keys.
 
-Replace with your keys. Add these in your deployed environment also.
+Also add a ENV variable with the channel ID to post to.
+`slack_praise_channel: xxxxx`
+
+Add these in your deployed environment also.
 
 _Do NOT commit this file._
