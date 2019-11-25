@@ -1,14 +1,15 @@
 require 'praise_bot'
 
 class TakeResponse
-  def self.format(values, user)
+  def self.format(values, view_id, user)
     Rails.logger.info("Received values: #{values} from #{user[:username]}")
-    # loop through values for each [:block_id] and then [:action_id]
-    # (or just extract the block/action IDs since we know what they are)
-    emoji = values[:emoji]
+
+    @slack_view = View.find({ view_id: view_id })
+
+    emoji = @slack_view.emoji
     headline = values[:headline_block][:headline][:value]
-    users_list = values[:users_list]
-    values_list = values[:values_list]
+    users_list = @slack_view.user_selection
+    values_list = @slack_view.value_selection
     comments = values[:details_block][:details][:value]
     submitter = user[:id]
 
@@ -60,5 +61,18 @@ class TakeResponse
     ]
 
     PraiseBot.submit(message_blocks)
+  end
+
+  def self.save(actions, view_id)
+    @slack_view = View.find({ view_id: view_id })
+    actions.each_with_object({}) do |object, map|
+      key = object[:action_id]
+      map[key] = object[:value]
+    end
+    if @slack_view.present?
+      @slack_view.update({ emoji: actions[:emoji], user_selection: actions[:users], value_selection: actions[:values] })
+    else
+      View.create({ view_id: view_id, emoji: actions[:emoji], user_selection: actions[:users], value_selection: actions[:values] })
+    end
   end
 end
