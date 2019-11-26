@@ -13,8 +13,8 @@ class TakeResponse
 
     emoji = @view.emoji
     headline = values['headline_block']['headline']['value']
-    users_list = @view.user_selection
-    values_list = @view.value_selection
+    users_list = @view.user_selection.joins(", ")
+    values_list = @view.value_selection.join(" | ")
     comments = values['details_block']['details']['value']
     submitter = user['id']
 
@@ -92,7 +92,9 @@ class TakeResponse
       when object['type'] == 'static_select'
         value = object['selected_option']['value']
       when object['type'] == 'multi_users_select'
-        value = object['selected_users']
+        value = object['selected_users'].each_with_object([]) do |user, array|
+          array << "<@#{user}>"
+        end
       else
         value = object['value']
       end
