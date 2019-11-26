@@ -31,13 +31,6 @@ class TakeResponse
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": ":rotating_light: *PRAISE ALERT!* :rotating_light:\n----------------------------"
-        }
-      },
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
           "text": ":#{emoji}: *#{headline}* :#{emoji}:\n#{users_list}"
         }
       },
