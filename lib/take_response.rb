@@ -12,11 +12,11 @@ class TakeResponse
     end
 
     emoji = @view.emoji
-    headline = values[:headline_block][:headline][:value]
+    headline = values['headline_block']['headline']['value']
     users_list = @view.user_selection
     values_list = @view.value_selection
-    comments = values[:details_block][:details][:value]
-    submitter = user[:id]
+    comments = values['details_block']['details']['value']
+    submitter = user['id']
 
     @view.update({
       headline: headline,
