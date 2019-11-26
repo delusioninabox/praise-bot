@@ -17,10 +17,10 @@ class  Api::PraiseController < ApplicationController
       PraiseModal.open(params[:trigger_id])
     when payload['type']=="block_actions"
       # save selects and other interactive elements
-      TakeResponse.save(payload['actions'], view['id'], payload['user'])
+      TakeResponse.save_action(payload['actions'], view['id'], payload['user'])
     when payload['type']=="view_submission" && view['callback_id']=="submit_praise"
       # recieved submission
-      TakeResponse.format(view['state']['values'], view['id'], payload['user'])
+      TakeResponse.format_message(view['state']['values'], view['id'], payload['user'])
     end
   end
 end

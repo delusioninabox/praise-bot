@@ -1,11 +1,11 @@
 require 'praise_bot'
 
 class TakeResponse
-  def self.format(values, view_id, user)
+  def self.format_message(values, view_id, user)
     Rails.logger.info("View submitted by #{user[:username]}")
 
-    @view = View.find({ view_id: view_id })
-    if @view.empty?
+    @view = View.find_by({ view_id: view_id })
+    if @view.nil?
       # throw error
       Rails.logger.info("View not found.")
       return
@@ -76,14 +76,14 @@ class TakeResponse
     PraiseBot.submit(message_blocks)
   end
 
-  def self.save(actions, view_id, user)
-    @view = View.where({ view_id: view_id })
-    if @view.empty?
+  def self.save_action(actions, view_id, user)
+    @view = View.find_by({ view_id: view_id })
+    if @view.nil?
       @view = View.new({ view_id: view_id, slack_user_id: user['id'] })
     end
 
     actions.each_with_object({}) do |object, map|
-      key = object['action_id']
+      key = object['action_id'].to_sym
       case
       when object['type'] == 'multi_static_select'
         value = object['selected_options'].each_with_object([]) do |selection, array|
@@ -96,11 +96,12 @@ class TakeResponse
       else
         value = object['value']
       end
-      @view.attributes = { "#{key}": value }
+      @view.update_attributes({ key => value })
     end
 
     if @view.save
       Rails.logger.info("Actions saved for view #{view_id}")
+      Rails.logger.info("View: #{@view.inspect}")
     else
       Rails.logger.info("Actions could not be saved for view #{view_id}")
     end
