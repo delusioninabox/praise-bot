@@ -10,7 +10,7 @@ class  Api::PraiseController < ApplicationController
     when params[:type]=="block_actions"
       # save selects and other interactive elements
       puts params.as_json
-      TakeResponse.save(params[:actions], params[:view][:id])
+      TakeResponse.save(params[:actions], params[:view][:id], params[:user])
     when params[:type]=="view_submission" && params[:view][:callback_id]=="submit_praise"
       # recieved submission
       TakeResponse.format(params[:view][:state][:values], params[:view][:id], params[:user])
