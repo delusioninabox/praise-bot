@@ -13,7 +13,7 @@ class TakeResponse
 
     emoji = @view.emoji
     headline = values['headline_block']['headline']['value']
-    users_list = @view.user_selection.joins(", ")
+    users_list = @view.user_selection.join(", ")
     values_list = @view.value_selection.join(" | ")
     comments = values['details_block']['details']['value']
     submitter = user['id']
