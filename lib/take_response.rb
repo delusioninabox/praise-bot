@@ -4,25 +4,27 @@ class TakeResponse
   def self.format(values, view_id, user)
     Rails.logger.info("View submitted by #{user[:username]}")
 
-    @slack_view = View.find({ view_id: view_id })
-    if @slack_view.empty?
+    @view = View.find({ view_id: view_id })
+    if @view.empty?
       # throw error
       Rails.logger.info("View not found.")
       return
     end
 
-    emoji = @slack_view.emoji
+    emoji = @view.emoji
     headline = values[:headline_block][:headline][:value]
-    users_list = @slack_view.user_selection
-    values_list = @slack_view.value_selection
+    users_list = @view.user_selection
+    values_list = @view.value_selection
     comments = values[:details_block][:details][:value]
     submitter = user[:id]
 
-    @slack_view.update({
+    @view.update({
       headline: headline,
       details: comments,
       posted: true
     })
+
+    Rails.logger.info("View details: #{@view}")
 
     message_blocks = [
       {
@@ -75,27 +77,33 @@ class TakeResponse
   end
 
   def self.save(actions, view_id, user)
-    @slack_view = View.find({ view_id: view_id })
+    @view = View.where({ view_id: view_id })
+    if @view.empty?
+      @view = View.new({ view_id: view_id, slack_user_id: user['id'] })
+    end
+
     actions.each_with_object({}) do |object, map|
-      key = object[:action_id]
-      map[key] = object[:value]
+      key = object['action_id']
+      case
+      when object['type'] == 'multi_static_select'
+        value = object['selected_options'].each_with_object([]) do |selection, array|
+          selection['value']
+        end
+      when object['type'] == 'static_select'
+        value = object['selected_option']['value']
+      else
+      when object['type'] == 'multi_users_select'
+        value = object['selected_users']
+      else
+        value = object['value']
+      end
+      @view.attributes = { "#{key}": value }
     end
-    if @slack_view.present?
-      @slack_view.update({
-        slack_user_id: user[:id],
-        emoji: actions[:emoji],
-        user_selection: actions[:users],
-        value_selection: actions[:values]
-      })
+
+    if @view.save
+      Rails.logger.info("Actions saved for view #{view_id}")
     else
-      View.create({
-        view_id: view_id,
-        slack_user_id: user[:id],
-        emoji: actions[:emoji],
-        user_selection: actions[:users],
-        value_selection: actions[:values]
-      })
+      Rails.logger.info("Actions could not be saved for view #{view_id}")
     end
-    Rails.logger.info("Actions saved for view #{view_id}")
   end
 end

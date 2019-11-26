@@ -18,7 +18,7 @@
         "text": "*I want to praise:*"
       },
       "accessory": {
-        "action_id": "users",
+        "action_id": "user_selection",
         "type": "multi_users_select",
         "placeholder": {
           "type": "plain_text",
@@ -138,7 +138,7 @@
         "text": "*They exhibited:*"
       },
       "accessory": {
-        "action_id": "values",
+        "action_id": "value_selection",
         "type": "multi_static_select",
         "placeholder": {
           "type": "plain_text",
@@ -152,7 +152,7 @@
               "text": "💪 Courage",
               "emoji": true
             },
-            "value": "courage"
+            "value": ":muscle: courage"
           },
           {
             "text": {
@@ -160,7 +160,7 @@
               "text": "🧠 Creativity",
               "emoji": true
             },
-            "value": "creativity"
+            "value": ":brain: creativity"
           },
           {
             "text": {
@@ -168,7 +168,7 @@
               "text": "❤ Empathy",
               "emoji": true
             },
-            "value": "empathy"
+            "value": ":heart: empathy"
           },
           {
             "text": {
@@ -176,7 +176,7 @@
               "text": "😇 Humility",
               "emoji": true
             },
-            "value": "humility"
+            "value": ":innocent: humility"
           },
           {
             "text": {
@@ -184,7 +184,7 @@
               "text": "🌟 Passion",
               "emoji": true
             },
-            "value": "passion"
+            "value": ":star2: passion"
           }
         ]
       }
