@@ -1,5 +1,6 @@
 require 'praise_modal'
-require 'take_response'
+require 'praise_message'
+require 'slack_actions'
 require 'json'
 
 class  Api::PraiseController < ApplicationController
@@ -17,10 +18,10 @@ class  Api::PraiseController < ApplicationController
       PraiseModal.open(params[:trigger_id])
     when payload['type']=="block_actions"
       # save selects and other interactive elements
-      TakeResponse.save_action(payload['actions'], view['id'], payload['user'])
+      SlackActions.save(payload['actions'], view['id'], payload['user'])
     when payload['type']=="view_submission" && view['callback_id']=="submit_praise"
       # recieved submission
-      TakeResponse.format_message(view['state']['values'], view['id'], payload['user'])
+      PraiseMessage.build(view['state']['values'], view['id'], payload['user'])
     end
   end
 end
