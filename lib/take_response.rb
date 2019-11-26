@@ -91,7 +91,6 @@ class TakeResponse
         end
       when object['type'] == 'static_select'
         value = object['selected_option']['value']
-      else
       when object['type'] == 'multi_users_select'
         value = object['selected_users']
       else
