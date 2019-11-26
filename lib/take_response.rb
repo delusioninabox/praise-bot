@@ -87,7 +87,7 @@ class TakeResponse
       case
       when object['type'] == 'multi_static_select'
         value = object['selected_options'].each_with_object([]) do |selection, array|
-          selection['value']
+          array << selection['value']
         end
       when object['type'] == 'static_select'
         value = object['selected_option']['value']
