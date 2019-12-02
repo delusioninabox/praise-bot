@@ -35,7 +35,7 @@ class  Api::PraiseController < ApplicationController
             :trigger_id => trigger_id,
             :view_id => view['id'],
             :view => JSON.parse(file),
-            :response_action: "errors",
+            :response_action => "errors",
             :errors => errors_object
           }.to_json,
           :headers => {
