@@ -1,6 +1,3 @@
-require 'HTTParty'
-require 'praise_modal'
-
 RSpec.describe PraiseModal do
   context '.open' do
     let(:slack_url) { 'https://slack.com/api/views.open' }
@@ -12,7 +9,7 @@ RSpec.describe PraiseModal do
     end
 
     it 'calls view.open with Slack API' do
-      expect(HTTParty).to have_received(:post).with(slack_url)
+      subject.class.open("12345")
     end
   end
 end
