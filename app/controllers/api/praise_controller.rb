@@ -26,7 +26,7 @@ class  Api::PraiseController < ApplicationController
         Rails.logger.error("Errors: #{errors_object.as_json}")
         render :json => {
           "response_action": "errors",
-          "text": "Something went wrong. D:"
+          "text": "Something went wrong. D:",
           "errors": errors_object.as_json
         }
       end
