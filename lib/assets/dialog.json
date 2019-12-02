@@ -210,5 +210,7 @@
         "text": "Be specific about what they did that was so awesome!"
       }
     }
-  ]
+  ],
+  "notify_on_close": true,
+  "clear_on_close": true
 }
