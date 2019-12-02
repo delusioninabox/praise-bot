@@ -23,10 +23,10 @@ class  Api::PraiseController < ApplicationController
       # recieved submission
       errors_object = PraiseMessage.build(view['state']['values'], view['id'], payload['user'])
       if !errors_object.blank?
-        Rails.logger.error("Errors: #{errors_object}")
+        Rails.logger.error("Errors: #{errors_object.as_json}")
         render :json => {
           "response_action": "errors",
-          "errors": errors_object
+          "errors": errors_object.as_json
         }
       end
     when payload['type']=="view_closed" && view['callback_id']=="submit_praise"
