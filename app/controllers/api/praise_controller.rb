@@ -28,6 +28,10 @@ class  Api::PraiseController < ApplicationController
           "response_action": "errors",
           "errors": errors_object
         }
+      else
+        render :json => {
+          "response_action": "clear"
+        }
       end
     when payload['type']=="view_closed" && view['callback_id']=="submit_praise"
       # modal canceled
