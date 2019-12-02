@@ -33,8 +33,5 @@ class  Api::PraiseController < ApplicationController
       # modal canceled
       PraiseMessage.destroy(view['id'])
     end
-    render :json => {
-      "message": "ok"
-    }
   end
 end
