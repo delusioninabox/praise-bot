@@ -12,7 +12,7 @@
   "blocks": [
     {
       "type": "section",
-      "block_id": "user-block",
+      "block_id": "userblock",
       "text": {
         "type": "mrkdwn",
         "text": "*I want to praise:*"
@@ -28,7 +28,7 @@
     },
     {
       "type": "input",
-      "block_id": "headline-block",
+      "block_id": "headlineblock",
       "element": {
         "action_id": "headline",
         "type": "plain_text_input"
@@ -41,7 +41,7 @@
     },
     {
       "type": "section",
-      "block_id": "emoji-block",
+      "block_id": "emojiblock",
       "text": {
         "type": "mrkdwn",
         "text": "*Choose an emoji:* (displays with above text)"
@@ -132,7 +132,7 @@
     },
     {
       "type": "section",
-      "block_id": "value-block",
+      "block_id": "valueblock",
       "text": {
         "type": "mrkdwn",
         "text": "*They exhibited:*"
@@ -191,7 +191,7 @@
     },
     {
       "type": "input",
-      "block_id": "details-block",
+      "block_id": "detailsblock",
       "element": {
         "type": "plain_text_input",
         "action_id": "details",

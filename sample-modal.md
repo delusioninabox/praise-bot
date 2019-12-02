@@ -208,7 +208,7 @@ Type `block_actions` will also run when the form is updated.
     "callback_id": "submit_praise",
     "state": {
       "values": {
-        "headline_block": { // block_id
+        "headlineblock": { // block_id
           "headline": { // action_id
             "type": "plain_text_input",
             "value": "Test Headline"

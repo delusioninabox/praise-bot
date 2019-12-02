@@ -11,8 +11,8 @@ class PraiseMessage
       return
     end
 
-    headline = values['headline-block']['headline']['value']
-    comments = values['details-block']['details']['value']
+    headline = values['headlineblock']['headline']['value']
+    comments = values['detailsblock']['details']['value']
     submitter = user['id']
 
     @view.assign_attributes({
@@ -91,22 +91,22 @@ class PraiseMessage
     errors = []
 
     if view.emoji.blank?
-      errors << { key: "emoji-block", message: "An emoji selection is required." }
+      errors << { key: "emojiblock", message: "An emoji selection is required." }
     end
     if view.headline.blank?
-      errors << { key: "headline-block", message: "A headline is required." }
+      errors << { key: "headlineblock", message: "A headline is required." }
     end
     if view.details.blank?
-      errors << { key: "details-block", message: "More information is required. Be specific about what they did, when, and why it's awesome!" }
+      errors << { key: "detailsblock", message: "More information is required. Be specific about what they did, when, and why it's awesome!" }
     end
     if view.user_selection.blank?
-      errors << { key: "user-block", message: "You need to select at least one user to praise." }
+      errors << { key: "userblock", message: "You need to select at least one user to praise." }
     end
     if view.user_selection.present? && view.user_selection.include?("<@#{view.slack_user_id}>")
-      errors << { key: "user-block", message: "You can't praise yourself! :)" }
+      errors << { key: "userblock", message: "You can't praise yourself! :)" }
     end
     if view.value_selection.blank?
-      errors << { key: "value-block", message: "You need to select at least one value." }
+      errors << { key: "valueblock", message: "You need to select at least one value." }
     end
 
     errors
