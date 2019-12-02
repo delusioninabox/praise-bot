@@ -24,10 +24,29 @@ class  Api::PraiseController < ApplicationController
       errors_object = PraiseMessage.build(view['state']['values'], view['id'], payload['user'])
       if !errors_object.blank?
         Rails.logger.error("Errors: #{errors_object.as_json}")
-        render :json => {
-          "response_action": "errors",
-          "errors": errors_object
+        # render :json => {
+        #   "response_action": "errors",
+        #   "errors": errors_object
+        # }
+        file = File.read(Rails.root + 'lib/assets/dialog.json')
+        options = {
+          :body => {
+            :token => token,
+            :trigger_id => trigger_id,
+            :view_id => view['id'],
+            :view => JSON.parse(file),
+            :response_action: "errors",
+            :errors => errors_object
+          }.to_json,
+          :headers => {
+            'Content-Type' => 'application/json; charset=utf-8',
+            'Accept' => 'application/json',
+            'Authorization' => "Bearer #{token}"
+          }
         }
+        url = 'https://slack.com/api/views.update'
+        response = HTTParty.post(url, options)
+        puts response.as_json
       else
         render :json => {
           "response_action": "clear"
