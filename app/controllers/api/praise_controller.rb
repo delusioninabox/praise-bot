@@ -26,7 +26,7 @@ class  Api::PraiseController < ApplicationController
         Rails.logger.error("Errors: #{errors_object.as_json}")
         render :json => {
           "response_action": "errors",
-          "errors": errors_object.as_json
+          "errors": errors_object
         }
       end
     when payload['type']=="view_closed" && view['callback_id']=="submit_praise"
