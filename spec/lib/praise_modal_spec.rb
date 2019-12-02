@@ -11,7 +11,7 @@ RSpec.describe PraiseModal do
       allow(HTTParty).to receive(:post).and_return(slack_response)
     end
 
-    it 'calls Slack API' do
+    it 'calls view.open with Slack API' do
       expect(HTTParty).to have_received(:post).with(slack_url)
     end
   end
