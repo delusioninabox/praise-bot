@@ -21,7 +21,13 @@ class  Api::PraiseController < ApplicationController
       SlackActions.save(payload['actions'], view['id'], payload['user'])
     when payload['type']=="view_submission" && view['callback_id']=="submit_praise"
       # recieved submission
-      PraiseMessage.build(view['state']['values'], view['id'], payload['user'])
+      errors_object = PraiseMessage.build(view['state']['values'], view['id'], payload['user'])
+      if !errors_object.blank?
+        render :json => {
+          "response_action": "errors",
+          "errors": errors_object
+        }
+      end
     when payload['type']=="view_closed" && view['callback_id']=="submit_praise"
       # modal canceled
       PraiseMessage.destroy(view['id'], payload['user'])
