@@ -6,7 +6,7 @@ FactoryBot.define do
 
     trait :valid_fields do
       emoji  { ":tada:" }
-      user_selection { ["<@USER15>". "<@USER20>"] }
+      user_selection { ["<@USER15>", "<@USER20>"] }
       value_selection { [":muscle: Coutage"] }
       headline { "Here is a headline!" }
       details { "Here is some text and details..." }
@@ -25,7 +25,7 @@ FactoryBot.define do
     end
 
     trait :self_selected do
-      user_selection { ["<@USER12345>". "<@USER20>"] }
+      user_selection { ["<@USER12345>", "<@USER20>"] }
     end
 
     trait :posted do

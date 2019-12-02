@@ -3,7 +3,7 @@ require 'praise_message'
 require 'slack_actions'
 require 'json'
 
-class  Api::PraiseController < ApplicationController
+class Api::PraiseController < ApplicationController
   skip_before_action :verify_authenticity_token
   layout false
 
