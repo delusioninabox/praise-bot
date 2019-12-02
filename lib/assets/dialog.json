@@ -12,13 +12,13 @@
   "blocks": [
     {
       "type": "section",
-      "block_id": "user_block",
+      "block_id": "user-block",
       "text": {
         "type": "mrkdwn",
         "text": "*I want to praise:*"
       },
       "accessory": {
-        "action_id": "user_selection",
+        "action_id": "user-selection",
         "type": "multi_users_select",
         "placeholder": {
           "type": "plain_text",
@@ -28,7 +28,7 @@
     },
     {
       "type": "input",
-      "block_id": "headline_block",
+      "block_id": "headline-block",
       "element": {
         "action_id": "headline",
         "type": "plain_text_input"
@@ -41,7 +41,7 @@
     },
     {
       "type": "section",
-      "block_id": "emoji_block",
+      "block_id": "emoji-block",
       "text": {
         "type": "mrkdwn",
         "text": "*Choose an emoji:* (displays with above text)"
@@ -132,13 +132,13 @@
     },
     {
       "type": "section",
-      "block_id": "value_block",
+      "block_id": "value-block",
       "text": {
         "type": "mrkdwn",
         "text": "*They exhibited:*"
       },
       "accessory": {
-        "action_id": "value_selection",
+        "action_id": "value-selection",
         "type": "multi_static_select",
         "placeholder": {
           "type": "plain_text",
@@ -191,7 +191,7 @@
     },
     {
       "type": "input",
-      "block_id": "details_block",
+      "block_id": "details-block",
       "element": {
         "type": "plain_text_input",
         "action_id": "details",

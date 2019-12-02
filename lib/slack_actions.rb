@@ -6,7 +6,7 @@ class SlackActions
     end
 
     actions.each_with_object({}) do |object, map|
-      key = object['action_id'].to_sym
+      key = object['action_id'].gsub("-", "_").to_sym
       case
       when object['type'] == 'multi_static_select'
         value = object['selected_options'].each_with_object([]) do |selection, array|
