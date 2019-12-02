@@ -91,7 +91,7 @@ class PraiseMessage
     errors = []
 
     if view.emoji.blank?
-      errors << { key: "emojiblock", message: "An emoji selection is required." }
+      errors << { key: "emoji-emojiblock", message: "An emoji selection is required." }
     end
     if view.headline.blank?
       errors << { key: "headline-headlineblock", message: "A headline is required." }
