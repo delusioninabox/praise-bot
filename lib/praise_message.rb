@@ -101,7 +101,7 @@ class PraiseMessage
     if view.user_selection.blank?
       errors << { key: "user-block", message: "You need to select at least one user to praise." }
     end
-    if view.user_selection.present? && view.user_selection.include?("<@#{view.slack_user_id}")
+    if view.user_selection.present? && view.user_selection.include?("<@#{view.slack_user_id}>")
       errors << { key: "user-block", message: "You can't praise yourself! :)" }
     end
     if view.value_selection.blank?
