@@ -23,6 +23,7 @@ class  Api::PraiseController < ApplicationController
       # recieved submission
       errors_object = PraiseMessage.build(view['state']['values'], view['id'], payload['user'])
       if !errors_object.blank?
+        Rails.logger.error("Errors: #{errors_object}")
         render :json => {
           "response_action": "errors",
           "errors": errors_object
@@ -32,5 +33,8 @@ class  Api::PraiseController < ApplicationController
       # modal canceled
       PraiseMessage.destroy(view['id'])
     end
+    render :json => {
+      "message": "ok"
+    }
   end
 end
