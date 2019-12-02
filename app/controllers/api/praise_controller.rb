@@ -30,7 +30,7 @@ class  Api::PraiseController < ApplicationController
       end
     when payload['type']=="view_closed" && view['callback_id']=="submit_praise"
       # modal canceled
-      PraiseMessage.destroy(view['id'], payload['user'])
+      PraiseMessage.destroy(view['id'])
     end
   end
 end

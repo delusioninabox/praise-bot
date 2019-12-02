@@ -76,10 +76,10 @@ class PraiseMessage
     PraiseBot.submit(message_blocks, @view)
   end
 
-  def self.destroy(view_id, user)
+  def self.destroy(view_id)
     @view = View.find_by({ view_id: view_id })
     if @view.delete
-      Rails.logger.info("View #{view_id} destroyed by #{user.username}.")
+      Rails.logger.info("View #{view_id} destroyed.")
     else
       Rails.logger.error("Could not destroy view #{view_id}.")
     end
