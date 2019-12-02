@@ -15,7 +15,7 @@ class PraiseMessage
     comments = values['details-block']['details']['value']
     submitter = user['id']
 
-    @view.update({
+    @view.assign_attributes({
       headline: headline,
       details: comments
     })
@@ -73,6 +73,7 @@ class PraiseMessage
       }
     ]
 
+    @view.save
     PraiseBot.submit(message_blocks, @view)
   end
 
