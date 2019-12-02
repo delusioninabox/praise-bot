@@ -16,11 +16,9 @@ class  Api::PraiseController < ApplicationController
     when params[:trigger_id]
       # trigger_id sent by /praise
       PraiseModal.open(params[:trigger_id])
-      render :json
     when payload['type']=="block_actions"
       # save selects and other interactive elements
       SlackActions.save(payload['actions'], view['id'], payload['user'])
-      render :json
     when payload['type']=="view_submission" && view['callback_id']=="submit_praise"
       # recieved submission
       errors_object = PraiseMessage.build(view['state']['values'], view['id'], payload['user'])
@@ -34,7 +32,6 @@ class  Api::PraiseController < ApplicationController
     when payload['type']=="view_closed" && view['callback_id']=="submit_praise"
       # modal canceled
       PraiseMessage.destroy(view['id'])
-      render :json
     end
   end
 end
