@@ -94,7 +94,7 @@ class PraiseMessage
       errors << { key: "emojiblock", message: "An emoji selection is required." }
     end
     if view.headline.blank?
-      errors << { key: "headlineblock", message: "A headline is required." }
+      errors << { key: "headline-headlineblock", message: "A headline is required." }
     end
     if view.details.blank?
       errors << { key: "detailsblock", message: "More information is required. Be specific about what they did, when, and why it's awesome!" }
