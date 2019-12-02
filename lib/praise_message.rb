@@ -7,7 +7,7 @@ class PraiseMessage
     @view = View.find_by({ view_id: view_id })
     if @view.nil?
       # throw error
-      Rails.logger.info("View not found.")
+      Rails.logger.error("View not found.")
       return
     end
 
@@ -67,5 +67,14 @@ class PraiseMessage
     ]
 
     PraiseBot.submit(message_blocks)
+  end
+
+  def self.destroy(view_id, user)
+    @view = View.find_by({ view_id: view_id })
+    if @view.delete
+      Rails.logger.info("View #{view_id} destroyed by #{user.username}.")
+    else
+      Rails.logger.error("Could not destroy view #{view_id}.")
+    end
   end
 end
