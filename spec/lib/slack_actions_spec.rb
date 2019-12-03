@@ -7,7 +7,7 @@ RSpec.describe SlackActions do
           "block_id": "emoji_block",
           "type": "static_select",
           "selected_option": {
-            "value": ":heart:"
+            "value": "heart"
           }
         }
       ].as_json
@@ -23,7 +23,7 @@ RSpec.describe SlackActions do
       subject.class.save(actions, "VIEW1", user)
       expect(View.all.count).to eq(1)
       new_view = View.last
-      expect(new_view.emoji).to eq(":heart:")
+      expect(new_view.emoji).to eq("heart")
       expect(new_view.view_id).to eq("VIEW1")
       expect(new_view.slack_user_id).to eq("USER2")
     end
@@ -59,7 +59,7 @@ RSpec.describe SlackActions do
           "block_id": "emoji_block",
           "type": "static_select",
           "selected_option": {
-            "value": ":heart:"
+            "value": "heart"
           }
         }
       ].as_json
@@ -68,7 +68,7 @@ RSpec.describe SlackActions do
     it("saves the single select value") do
       subject.class.save(actions, view.view_id, "USER12345")
       updated_view = View.find_by({ view_id: view.view_id })
-      expect(updated_view.emoji).to eq(":heart:")
+      expect(updated_view.emoji).to eq("heart")
     end
   end
 
