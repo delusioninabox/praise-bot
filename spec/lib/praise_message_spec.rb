@@ -74,10 +74,6 @@ RSpec.describe PraiseMessage do
     end
   end
 
-  context "when missing or invalid values" do
-    # it returns errors
-  end
-
   context "when deleting a view" do
     # it is deleted
   end

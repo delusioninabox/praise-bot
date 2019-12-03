@@ -78,4 +78,100 @@ RSpec.describe Api::PraiseController, type: :controller do
       end
     end
   end
+
+  context "view_submission with missing values" do
+    let(:params) { { "payload": '{
+      "type": "view_submission",
+      "user": {
+        "id": "USER12345",
+        "username": "Bob"
+      },
+      "view": {
+        "id": "VIEW2019",
+        "callback_id": "submit_praise",
+        "state": {
+          "values": {
+            "headline-block": {
+              "headline": {
+                "value": "A new headline!"
+              }
+            },
+            "details-block": {
+              "details": {
+                "value": "Here is why they\'re great..."
+              }
+            }
+          }
+        }
+      }
+    }' }}
+    let(:user) {
+      {
+        "id": "USER12345",
+        "username": "Bob"
+      }.as_json
+    }
+    let(:error_list) {
+      {
+        "response_action": "errors",
+        "errors": {
+          "emoji-block": "An emoji selection is required.",
+          "user-block": "You need to select at least one user to praise.",
+          "value-block": "You need to select at least one value."
+        }
+      }
+    }
+    let!(:view) { FactoryBot.create(:view) }
+    it("returns a list of errors") do
+      post :create, :params => params
+      expect(response.body).to eq(error_list.to_json)
+    end
+  end
+
+  context "view_submission with self selected" do
+    let(:params) { { "payload": '{
+      "type": "view_submission",
+      "user": {
+        "id": "USER12345",
+        "username": "Bob"
+      },
+      "view": {
+        "id": "VIEW2019",
+        "callback_id": "submit_praise",
+        "state": {
+          "values": {
+            "headline-block": {
+              "headline": {
+                "value": "A new headline!"
+              }
+            },
+            "details-block": {
+              "details": {
+                "value": "Here is why they\'re great..."
+              }
+            }
+          }
+        }
+      }
+    }' }}
+    let(:user) {
+      {
+        "id": "USER12345",
+        "username": "Bob"
+      }.as_json
+    }
+    let(:error_list) {
+      {
+        "response_action": "errors",
+        "errors": {
+          "user-block": "You can't praise yourself! :)"
+        }
+      }
+    }
+    let!(:view) { FactoryBot.create(:view, :valid_fields, :self_selected) }
+    it("returns a list of errors") do
+      post :create, :params => params
+      expect(response.body).to eq(error_list.to_json)
+    end
+  end
 end
