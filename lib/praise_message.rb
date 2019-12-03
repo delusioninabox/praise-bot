@@ -54,17 +54,17 @@ class PraiseMessage
       {
         "type": "divider"
       },
-          {
+      {
         "type": "section",
         "text": {
           "type": "mrkdwn",
           "text": "#{comments}"
               }
-          },
+      },
       {
         "type": "divider"
       },
-          {
+      {
         "type": "section",
         "text": {
           "type": "mrkdwn",
