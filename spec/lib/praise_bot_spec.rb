@@ -59,5 +59,11 @@ RSpec.describe PraiseBot do
       subject.class.submit(message, view)
       expect(view.posted).to eq(true)
     end
+
+    it 'requires message block and view' do
+      expect { subject.class.submit() }.to raise_error(ArgumentError)
+      expect { subject.class.submit(message) }.to raise_error(ArgumentError)
+      expect { subject.class.submit(view) }.to raise_error(ArgumentError)
+    end
   end
 end

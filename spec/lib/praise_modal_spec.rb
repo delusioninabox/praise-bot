@@ -11,5 +11,9 @@ RSpec.describe PraiseModal do
     it 'calls view.open with Slack API' do
       subject.class.open("12345")
     end
+
+    it 'requires an ID' do
+      expect { subject.class.open() }.to raise_error(ArgumentError)
+    end
   end
 end
