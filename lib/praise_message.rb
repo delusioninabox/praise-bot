@@ -1,16 +1,21 @@
 require 'praise_bot'
 
 class PraiseMessage
+
+  # Validate submission
   def self.build(values, view_id, user)
     Rails.logger.info("View submitted by #{user[:username]}")
 
+    # Do we have the view?
+    # We should b/c of required dropdowns
     @view = View.find_by({ view_id: view_id })
     if @view.nil?
-      # throw error
+      # If not, throw an error
       Rails.logger.error("View not found.")
-      return
+      return { "error": "Please fill out all fields." }
     end
 
+    # Text inputs sent with view_submission, not block_actions
     headline = values['headline-block']['headline']['value']
     comments = values['details-block']['details']['value']
     submitter = user['id']
@@ -20,6 +25,7 @@ class PraiseMessage
       details: comments
     })
 
+    # Check all information is inputted & correct
     errors = validate_view(@view)
     if !errors.blank?
       return errors.each_with_object({}) do | error, object |
@@ -27,12 +33,14 @@ class PraiseMessage
       end
     end
 
+    # Format values
     emoji = @view.emoji
     users_list = @view.user_selection.join(", ")
     values_list = @view.value_selection.join(" | ")
 
     Rails.logger.info("View details: #{@view}")
 
+    # Build message
     message_blocks = [
       {
         "type": "section",
@@ -73,10 +81,12 @@ class PraiseMessage
       }
     ]
 
+    # Save and post to Slack channel
     @view.save
     PraiseBot.submit(message_blocks, @view)
   end
 
+  # Delete a view if it exists
   def self.destroy(view_id)
     @view = View.find_by({ view_id: view_id })
     if @view.delete
@@ -87,6 +97,7 @@ class PraiseMessage
   end
 
   private
+  # Validation check
   def self.validate_view(view)
     errors = []
 
