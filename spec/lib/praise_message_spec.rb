@@ -75,6 +75,12 @@ RSpec.describe PraiseMessage do
   end
 
   context "when deleting a view" do
-    # it is deleted
+    let!(:view) { FactoryBot.create(:view, :valid_fields) }
+    it("it is deleted") do
+      expect(View.all.count).to eq(1)
+      subject.class.destroy(view.view_id)
+      expect(View.all.count).to eq(0)
+      expect(View.find_by({ view_id: view.view_id })).to eq(nil)
+    end
   end
 end

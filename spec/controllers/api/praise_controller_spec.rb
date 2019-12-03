@@ -169,7 +169,7 @@ RSpec.describe Api::PraiseController, type: :controller do
       }
     }
     let!(:view) { FactoryBot.create(:view, :valid_fields, :self_selected) }
-    it("returns a list of errors") do
+    it("returns a error") do
       post :create, :params => params
       expect(response.body).to eq(error_list.to_json)
     end
