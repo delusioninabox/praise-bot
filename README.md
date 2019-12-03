@@ -1,17 +1,20 @@
 # README
 
 Ruby Version: `2.5.3p105`
+
+
 Rails Version: `5.2.3`
+
 Uses **Postgres** for the database, which saves submissions and those in-progress.
 
 Run tests with `bundle exec rspec`.
 
 ## 1. Installing Repo
-Fork the repo & clone to your computer. Then navigate into the folder.
+1. Fork the repo & clone to your computer. Then navigate into the folder.
 
-Run `bundle install`
+2. Run `bundle install`
 
-Run `rake db:setup && db:migrate`
+3. Run `rake db:setup && db:migrate`
 
 After finishing steps 3 and 4, you can run locally with `rails s`. The API can be found locally at `http://localhost:3000/api/praise`.
 
@@ -22,16 +25,16 @@ Deploy your app to Heroku or another site. You can use Heroku's CLI, or deploy f
 Create a new App to your workspace for Praise Bot.
 
 ## 4. The Bot
-Add a bot user under `Features & Functionality`. Then go to `OAuth & Permissions` to find your bot's auth key.
+1. Add a bot user under `Features & Functionality`. Then go to `OAuth & Permissions` to find your bot's auth key.
 
-Run `bundle exec figaro install` to generate a `config/application.yml` file.
+2. Run `bundle exec figaro install` to generate a `config/application.yml` file.
 
-Add your ENV variables to this file locally:
+3. Add your ENV variables to this file locally:
 `slack_bot_auth: xoxb-xxxxxxx-xxxxxx-xxxxxx`
 
-Replace the above value with your keys.
+4. Replace the above value with your keys.
 
-Also add a ENV variable with the channel ID to post to.
+5. Also add a ENV variable with the channel ID to post to.
 `slack_praise_channel: xxxxx`
 
 **How do I get the channel ID?** If you go to the team's Slack in your browser, and then click into the channel you want to post to, the channel ID will be the last string after the last `/`.
@@ -43,11 +46,11 @@ Add these in your deployed environment also.
 _**---- Do NOT commit this file. ----**_
 
 ## 5. Making The Bot Live
-Back in the bot's Slack App settings, go to `Interactive Components`. Turn `interactivity` on and add a request URL with your deployed environment. It should look like this: `https://deployed-domain.com/api/praise`
+1. Back in the bot's Slack App settings, go to `Interactive Components`. Turn `interactivity` on and add a request URL with your deployed environment. It should look like this: `https://deployed-domain.com/api/praise`
 
-Next go to `Slash Commands` and add a new slash command. Make the command `/praise` (or `/kudos` if you'd rather). *The request URL will be same as the URL you used above.*
+2. Next go to `Slash Commands` and add a new slash command. Make the command `/praise` (or `/kudos` if you'd rather). *The request URL will be same as the URL you used above.*
 
-Make sure it's installed in the team's workspace, update bot's display, and you're good to go!
+Make sure it's installed in the team's workspace, you update bot's display name/image, and you're good to go!
 
 ## How It Works
 1. A user, in any channel, can type `/praise` as a command.
