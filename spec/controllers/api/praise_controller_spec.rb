@@ -11,15 +11,71 @@ RSpec.describe Api::PraiseController, type: :controller do
     end
 
     context "with block_actions" do
-      # calls to save action
+      let(:params) { { "payload": '{
+        "type": "block_actions",
+        "user": {
+          "id": "UA12345",
+          "username": "bob"
+        },
+        "actions": [
+          {
+            "action_id": "selection",
+            "block_id": "selection_block",
+            "type": "static_select",
+            "selected_option": {
+              "value": "this one"
+            }
+          }
+        ],
+        "view": {
+          "id": "1"
+        }
+      }' } }
+      it 'calls to save block actions' do
+        expect(SlackActions).to receive(:save).once
+        post :create, :params => params
+      end
     end
 
     context "with view_submission" do
-      # calls to view submission
+      let(:params) { { "payload": '{
+        "type": "view_submission",
+        "user": {
+          "id": "UA12345",
+          "username": "bob"
+        },
+        "view": {
+          "id": "1",
+          "callback_id": "submit_praise",
+          "state": {
+            "values": [
+              { "action_id": "test" }
+            ]
+          }
+        }
+      }' }}
+      it 'calls to submit the praise' do
+        expect(PraiseMessage).to receive(:build).once
+        post :create, :params => params
+      end
     end
 
     context "no view_closed" do
-      # calls to delete view
+      let(:params) { { "payload": '{
+        "type": "view_closed",
+        "user": {
+          "id": "UA12345",
+          "username": "bob"
+        },
+        "view": {
+          "id": "1",
+          "callback_id": "submit_praise"
+        }
+      }' }}
+      it 'calls to submit the praise' do
+        expect(PraiseMessage).to receive(:destroy).once
+        post :create, :params => params
+      end
     end
   end
 end
