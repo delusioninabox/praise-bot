@@ -1,4 +1,5 @@
-# README
+# Slack Praise Bot
+Give a shout-out or kudos to people in your Slack server! Uses a slash command to prompt open the form from any channel, and will post a formatted message in a single channel.
 
 Ruby Version: `2.5.3p105`
 
@@ -38,7 +39,7 @@ Create a new App to your workspace for Praise Bot.
 5. Also add a ENV variable with the channel ID to post to.
 `slack_praise_channel: xxxxx`
 
-**How do I get the channel ID?** If you go to the team's Slack in your browser, and then click into the channel you want to post to, the channel ID will be the last string after the last `/`.
+**How do I get the channel ID?** If you go to the team's Slack in your browser, and then click into the channel you want to post to, the channel ID will be the last string after the last `/` in the URL.
 
 Example: `https://app.slack.com/client/TEAM_ID/CHANNEL_ID`
 
