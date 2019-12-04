@@ -2,7 +2,6 @@
 
 Ruby Version: `2.5.3p105`
 
-
 Rails Version: `5.2.3`
 
 Uses **Postgres** for the database, which saves submissions and those in-progress.
@@ -10,6 +9,8 @@ Uses **Postgres** for the database, which saves submissions and those in-progres
 Run tests with `bundle exec rspec`.
 
 ## 1. Installing Repo
+I recommend forking the repo so you can customize for your server's needs. For example, this view has a multi select for our company values. You may want to change these to your own values, or remove the block and validation if you don't wish to use it. Likewise, you may want to customize how the message displays. Forking will let you use this repo as a base for how to make the changes you need to suit your server!
+
 1. Fork the repo & clone to your computer. Then navigate into the folder.
 
 2. Run `bundle install`
