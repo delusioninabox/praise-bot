@@ -1,6 +1,6 @@
 require 'praise_modal'
 require 'praise_message'
-require 'slack_actions'
+require 'process_values'
 require 'json'
 
 class Api::PraiseController < ApplicationController
