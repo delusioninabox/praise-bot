@@ -1,8 +1,9 @@
 class ProcessValues
   def self.save(values, view)
-    values.each_with_object({}) do |block, map|
-      key = block[0][0].gsub("-", "_").to_sym
-      action = block[0][0]
+    values.each_with_object({}) do |object, map|
+      key = object[1].keys.first
+      field_name = key.gsub("-", "_").to_sym
+      action = object[1][key]
       case
       when action['type'] == 'multi_static_select'
         value = action['selected_options'].each_with_object([]) do |selection, array|
@@ -17,7 +18,7 @@ class ProcessValues
       else
         value = action['value']
       end
-      view.update_attributes({ key => value })
+      view.update_attributes({ field_name => value })
     end
 
     if view.save
