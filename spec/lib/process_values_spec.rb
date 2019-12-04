@@ -1,4 +1,4 @@
-RSpec.describe SlackActions do
+RSpec.describe ProcessValues do
   context "if no existing view" do
     let(:actions) {
       [

@@ -17,14 +17,6 @@ class PraiseMessage
     # Process & save submitted values
     @view = ProcessValues.save(values, @view)
 
-    # Process values
-    headline = @view[:headline]
-    comments = @view[:details]
-    emoji = @view[:emoji]
-    users_list = @view[:user_selection].join(", ")
-    values_list = @view[:value_selection].join(" | ")
-    submitter = @view[:slack_user_id]
-
     # Check all information is inputted & correct
     errors = validate_view(@view)
     if !errors.blank?
@@ -33,7 +25,14 @@ class PraiseMessage
       end
     end
 
-    Rails.logger.info("View details: #{@view}")
+    # Process values
+    headline = @view[:headline]
+    comments = @view[:details]
+    emoji = @view[:emoji]
+    users_list = @view[:user_selection].join(", ")
+    values_list = @view[:value_selection].join(" | ")
+    submitter = @view[:slack_user_id]
+
 
     # Build message
     message_blocks = [
