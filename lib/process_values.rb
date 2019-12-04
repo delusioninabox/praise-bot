@@ -17,7 +17,7 @@ class ProcessValues
       else
         value = action['value']
       end
-      # view.update_attributes({ key => value })
+      view.update_attributes({ key => value })
     end
 
     if view.save

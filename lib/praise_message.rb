@@ -16,6 +16,7 @@ class PraiseMessage
 
     # Process & save submitted values
     @view = ProcessValues.save(values, @view)
+    Rails.logger.info("View: #{@view}")
 
     # Check all information is inputted & correct
     errors = validate_view(@view)
