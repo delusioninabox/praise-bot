@@ -21,7 +21,12 @@ I recommend forking the repo so you can customize for your server's needs. For e
 After finishing steps 3 and 4, you can run locally with `rails s`. The API can be found locally at `http://localhost:3000/api/praise`.
 
 ## 2. Adding To Heroku
-Deploy your app to Heroku or another site. You can use Heroku's CLI, or deploy from your forked repo.
+Deploy your app to Heroku or another site. You can use Heroku's CLI, or deploy from your forked repo. Add the following add-ons:
+1. Postgres (required)
+2. Papertrail (recommended)
+3. New Relic APM (recommended)
+  - If you *don't* want to use New Relic APM, remove `gem 'newrelic_rpm'` from the Gemfile, as well as `newrelic.yml` from the config folder.
+  - If you *do* use New Relic APM, be sure to replace the `newrelic.yml` file in the config folder with one provided to your account from the setup with New Relic. (Follow the Ruby/Rails installation.)
 
 ## 3. Adding To Slack
 Create a new App to your workspace for Praise Bot.
