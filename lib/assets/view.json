@@ -11,7 +11,7 @@
   },
   "blocks": [
     {
-      "type": "section",
+      "type": "input",
       "block_id": "user-block",
       "text": {
         "type": "mrkdwn",
@@ -40,7 +40,7 @@
       }
     },
     {
-      "type": "section",
+      "type": "input",
       "block_id": "emoji-block",
       "text": {
         "type": "mrkdwn",
@@ -131,7 +131,7 @@
       }
     },
     {
-      "type": "section",
+      "type": "input",
       "block_id": "value-block",
       "text": {
         "type": "mrkdwn",
