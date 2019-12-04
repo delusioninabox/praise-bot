@@ -13,18 +13,20 @@
     {
       "type": "input",
       "block_id": "user-block",
-      "text": {
-        "type": "mrkdwn",
-        "text": "*I want to praise:*"
-      },
-      "accessory": {
+      "element": {
         "action_id": "user-selection",
-        "type": "multi_users_select",
-        "placeholder": {
-          "type": "plain_text",
-          "text": "Select user(s)"
-        }
-      }
+				"type": "multi_users_select",
+				"placeholder": {
+					"type": "plain_text",
+					"text": "Select user(s)",
+					"emoji": true
+				}
+			},
+			"label": {
+				"type": "plain_text",
+				"text": "I want to praise:",
+				"emoji": true
+			}
     },
     {
       "type": "input",
@@ -42,17 +44,13 @@
     {
       "type": "input",
       "block_id": "emoji-block",
-      "text": {
-        "type": "mrkdwn",
-        "text": "*Choose an emoji:* (displays with above text)"
-      },
-      "accessory": {
+      "element": {
         "action_id": "emoji",
-        "type": "static_select",
-        "placeholder": {
-          "type": "plain_text",
-          "text": "Select an emoji",
-          "emoji": true
+				"type": "static_select",
+				"placeholder": {
+					"type": "plain_text",
+					"text": "Select an emoji",
+					"emoji": true
         },
         "options": [
           {
@@ -128,22 +126,23 @@
             "value": "heart"
           }
         ]
-      }
+			},
+			"label": {
+				"type": "plain_text",
+				"text": "Choose an emoji: (displays with above text)",
+				"emoji": true
+			}
     },
     {
       "type": "input",
       "block_id": "value-block",
-      "text": {
-        "type": "mrkdwn",
-        "text": "*They exhibited:*"
-      },
-      "accessory": {
+      "element": {
         "action_id": "value-selection",
-        "type": "multi_static_select",
-        "placeholder": {
-          "type": "plain_text",
-          "text": "Select value(s)",
-          "emoji": true
+				"type": "multi_static_select",
+				"placeholder": {
+					"type": "plain_text",
+					"text": "Select value(s)",
+					"emoji": true
         },
         "options": [
           {
@@ -187,7 +186,12 @@
             "value": ":star2: passion"
           }
         ]
-      }
+			},
+			"label": {
+				"type": "plain_text",
+				"text": "They exhibited:",
+				"emoji": true
+			}
     },
     {
       "type": "input",
