@@ -1,7 +1,7 @@
 class ProcessValues
   def self.save(values, view)
     values.each_with_object({}) do |block, map|
-      key = block[0].gsub("-", "_").to_sym
+      key = block[0][0].gsub("-", "_").to_sym
       action = block[0][0]
       case
       when action['type'] == 'multi_static_select'
