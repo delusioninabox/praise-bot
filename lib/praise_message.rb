@@ -10,20 +10,20 @@ class PraiseMessage
     # We should b/c of required dropdowns
     @view = View.find_by({ view_id: view_id })
     if @view.nil?
-      # If not, throw an error
-      Rails.logger.error("View not found.")
-      return { "error": "Please fill out all fields." }
+      # If not, create one
+      @view = View.new({ view_id: view_id, slack_user_id: user['id'] })
     end
 
-    # Text inputs sent with view_submission, not block_actions
-    headline = values['headline-block']['headline']['value']
-    comments = values['details-block']['details']['value']
-    submitter = user['id']
+    # Process & save submitted values
+    @view = ProcessValues.save(values, @view)
 
-    @view.assign_attributes({
-      headline: headline,
-      details: comments
-    })
+    # Process values
+    headline = @view[:headline]
+    comments = @view[:details]
+    emoji = @view[:emoji]
+    users_list = @view[:user_selection].join(", ")
+    values_list = @view[:value_selection].join(" | ")
+    submitter = @view[:slack_user_id]
 
     # Check all information is inputted & correct
     errors = validate_view(@view)
@@ -32,11 +32,6 @@ class PraiseMessage
         object["#{error[:key]}"] = "#{error[:message]}"
       end
     end
-
-    # Format values
-    emoji = @view.emoji
-    users_list = @view.user_selection.join(", ")
-    values_list = @view.value_selection.join(" | ")
 
     Rails.logger.info("View details: #{@view}")
 
