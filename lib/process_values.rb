@@ -1,5 +1,13 @@
 class ProcessValues
   def self.save(values, view)
+    # Check has value & view
+    if view.empty? || values.empty?
+      return
+    end
+
+    # Loop through the values
+    # Pull the field_name (action_id)
+    # Then the value, based on type
     values.each_with_object({}) do |object, map|
       key = object[1].keys.first
       field_name = key.gsub("-", "_").to_sym
@@ -15,7 +23,7 @@ class ProcessValues
         value = action['selected_users'].each_with_object([]) do |user, array|
           array << "<@#{user}>"
         end
-      else
+      else # text input
         value = action['value']
       end
       view.update_attributes({ field_name => value })
@@ -28,6 +36,7 @@ class ProcessValues
       Rails.logger.info("Actions could not be saved for view #{view.view_id}")
     end
 
+    # return updated View
     view
   end
 end

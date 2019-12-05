@@ -21,6 +21,8 @@ class PraiseMessage
     # Check all information is inputted & correct
     errors = validate_view(@view)
     if !errors.blank?
+      # if errors, return
+      # format is "block_id": "error message"
       return errors.each_with_object({}) do | error, object |
         object["#{error[:key]}"] = "#{error[:message]}"
       end
@@ -76,8 +78,7 @@ class PraiseMessage
       }
     ]
 
-    # Save and post to Slack channel
-    @view.save
+    # Post to Slack channel
     PraiseBot.submit(message_blocks, @view)
   end
 
@@ -115,6 +116,7 @@ class PraiseMessage
       errors << { key: "value-block", message: "You need to select at least one value." }
     end
 
+    # return errors
     errors
   end
 end
