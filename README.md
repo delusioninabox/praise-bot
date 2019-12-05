@@ -64,8 +64,7 @@ Make sure it's installed in the team's workspace, you update bot's display name/
 2. Slack uses the API to hit our API's POST `PraiseController` (`/api/praise`), which processes all requests from Slack.
 3. The controller calls `view.open` to Slack's API with the form built in `lib/assets/view.json`
 4. Slack will open the modal form for the user.
-5. **When the user selects a dropdown or interactive input**, Slack pings our API with a `block_action` request. Our API will save the value to the corresponding field and process the value based on the input type.
-5. **When the user submits the form,** Slack sends a `view_submission` request. We first validate they've filled out all information quickly. **If fields are missing or invalid,** we return a list of errors to be displayed. If it is valid, we build the message format to post and submit to Slack.
+5. **When the user submits the form,** Slack sends a `view_submission` request. The values are sent to be processed and saved (the `action_id` should match the database column name). We validate they've filled out all information quickly. **If fields are missing or invalid,** we return a list of errors to be displayed. If it is valid, we build the message format to post and submit to Slack.
 6. **When the user hits cancel,** Slack sends a `view_closed` request. If we have their view saved -- because they filled out an input, for example -- we delete the incomplete view.
 
 ### Praise Controller
@@ -75,4 +74,4 @@ The praise controller is responsible only for handling POST requests from Slack,
 1. `PraiseBot.submit`: Posts the finalized message to the selected channel.
 2. `PraiseMessage.build`: Validates the final submission and formats the message to post.
 3. `PraiseMessage.destroy`: Deletes incomplete submissions.
-4.  `SlackActions.save`: Saves values received in `block_action` requests.
+4. `ProcessValues.save`: Saves values received in `view_submission` by type.
