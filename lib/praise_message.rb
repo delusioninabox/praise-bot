@@ -85,7 +85,7 @@ class PraiseMessage
   # Delete a view if it exists
   def self.destroy(view_id)
     @view = View.find_by({ view_id: view_id })
-    if @view.delete
+    if @view.present? && @view.delete
       Rails.logger.info("View #{view_id} destroyed.")
     else
       Rails.logger.error("Could not destroy view #{view_id}.")
