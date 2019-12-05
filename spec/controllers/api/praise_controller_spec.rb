@@ -10,33 +10,6 @@ RSpec.describe Api::PraiseController, type: :controller do
       end
     end
 
-    context "with block_actions" do
-      let(:params) { { "payload": '{
-        "type": "block_actions",
-        "user": {
-          "id": "UA12345",
-          "username": "bob"
-        },
-        "actions": [
-          {
-            "action_id": "selection",
-            "block_id": "selection_block",
-            "type": "static_select",
-            "selected_option": {
-              "value": "this one"
-            }
-          }
-        ],
-        "view": {
-          "id": "1"
-        }
-      }' } }
-      it 'calls to save block actions' do
-        expect(SlackActions).to receive(:save).once
-        post :create, :params => params
-      end
-    end
-
     context "with view_submission" do
       let(:params) { { "payload": '{
         "type": "view_submission",
@@ -60,7 +33,7 @@ RSpec.describe Api::PraiseController, type: :controller do
       end
     end
 
-    context "no view_closed" do
+    context "with view_closed" do
       let(:params) { { "payload": '{
         "type": "view_closed",
         "user": {

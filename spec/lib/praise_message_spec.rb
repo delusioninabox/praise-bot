@@ -16,7 +16,7 @@ RSpec.describe PraiseMessage do
     }
     let(:user) {
       {
-        "id": "USER123",
+        "id": "USER12345",
         "username": "Carol"
       }.as_json
     }
@@ -61,7 +61,7 @@ RSpec.describe PraiseMessage do
             "type": "section",
             "text": {
               "type": "mrkdwn",
-              "text": "_Submitted by <@USER123>_"
+              "text": "_Submitted by <@USER12345>_"
             }
           }
         ],

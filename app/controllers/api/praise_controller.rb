@@ -19,9 +19,6 @@ class Api::PraiseController < ApplicationController
     when params[:trigger_id]
       # User typed /praise command
       PraiseModal.open(params[:trigger_id])
-    when payload['type']=="block_actions"
-      # Save selects and other interactive elements
-      SlackActions.save(payload['actions'], view['id'], payload['user'])
     when payload['type']=="view_submission" && view['callback_id']=="submit_praise"
       # User hit "submit"
       # PraiseMessage.build to return error object
