@@ -1,7 +1,7 @@
 class ProcessValues
   def self.save(values, view)
     # Check has value & view
-    if view.empty? || values.empty?
+    if view.nil? || values.empty?
       return
     end
 

@@ -31,15 +31,13 @@ Create a new App to your workspace for Praise Bot.
 ## 4. The Bot
 1. Add a bot user under `Features & Functionality`. Then go to `OAuth & Permissions` to find your bot's auth key.
 
-2. Run `bundle exec figaro install` to generate a `config/application.yml` file.
+2. Run `bundle exec figaro install` to generate a `config/application.yml` file. Add the following ENV (environment) variables to this file locally.
 
-3. Add your ENV variables to this file locally:
-`slack_bot_auth: xoxb-xxxxxxx-xxxxxx-xxxxxx`
+3. Replace this value with your bot's key: `slack_bot_auth: xoxb-xxxxxxx-xxxxxx-xxxxxx`
 
-4. Replace the above value with your keys.
+4. In `Basic Information` > `App Credentials` you will find your app's client ID and secret. Add the signing secret as an ENV variable. `slack_secret_signature: xxxxxxxxxxxxxxxx`
 
-5. Also add a ENV variable with the channel ID to post to.
-`slack_praise_channel: xxxxx`
+5. Also add a ENV variable with the channel ID to post to. `slack_praise_channel: xxxxx`
 
 **How do I get the channel ID?** If you go to the team's Slack in your browser, and then click into the channel you want to post to, the channel ID will be the last string after the last `/` in the URL.
 
