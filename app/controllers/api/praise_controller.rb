@@ -11,6 +11,7 @@ class Api::PraiseController < ApplicationController
     # Is this a valid Slack request?
     signature = request.headers["X-Slack-Signature"]
     secret = ENV["slack_secret_signature"]
+    Rails.logger.info("Comparing #{signature} to #{secret}")
     if signature.empty? || secret.empty?
       return render :json => {
         "text": "Invalid Slack request; Missing secret."
