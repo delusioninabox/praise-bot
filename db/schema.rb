@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_225307) do
+ActiveRecord::Schema.define(version: 2019_12_11_204619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,10 @@ ActiveRecord::Schema.define(version: 2019_11_25_225307) do
     t.text "details"
     t.text "user_selection", array: true
     t.text "value_selection", array: true
-    t.boolean "posted"
+    t.boolean "posted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "custom_values"
   end
 
 end
