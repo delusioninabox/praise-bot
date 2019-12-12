@@ -198,28 +198,28 @@
 				"emoji": true
 			}
     },
-		{
-			"type": "input",
+    {
+      "type": "input",
       "optional": true,
       "block_id": "custom-values-block",
-			"element": {
+      "element": {
         "action_id": "custom-values",
         "type": "plain_text_input",
         "placeholder": {
           "type": "plain_text",
           "text": "example | value | :tada: value"
         }
-			},
-			"label": {
-				"type": "plain_text",
-				"text": "And/Or:",
-				"emoji": true
       },
-			"hint": {
-				"type": "plain_text",
-				"text": "Write in your own values. Emojis allowed."
-			}
-		},
+      "label": {
+        "type": "plain_text",
+        "text": "And/Or:",
+        "emoji": true
+      },
+      "hint": {
+        "type": "plain_text",
+        "text": "Write in your own values. Emojis allowed."
+      }
+    },
     {
       "type": "input",
       "block_id": "details-block",
