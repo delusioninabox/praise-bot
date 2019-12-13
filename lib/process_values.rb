@@ -13,20 +13,22 @@ class ProcessValues
       field_name = key.gsub("-", "_").to_sym
       action = object[1][key]
       case
-      when action['type'] == 'multi_static_select'
+      when action['type'] == 'multi_static_select' && action['selected_options'].present?
         value = action['selected_options'].each_with_object([]) do |selection, array|
           array << selection['value']
         end
-      when action['type'] == 'static_select'
+      when action['type'] == 'static_select' && action['selected_option'].present?
         value = action['selected_option']['value']
-      when action['type'] == 'multi_users_select'
+      when action['type'] == 'multi_users_select' && action['selected_users'].present?
         value = action['selected_users'].each_with_object([]) do |user, array|
           array << "<@#{user}>"
         end
       else # text input
         value = action['value']
       end
-      view.update_attributes({ field_name => value })
+      if value.present?
+        view.update_attributes({ field_name => value })
+      end
     end
 
     if view.save
