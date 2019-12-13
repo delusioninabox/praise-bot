@@ -43,6 +43,9 @@ class PraiseMessage
     else
       full_values = nil
     end
+    Rails.logger.info("Values: #{@view[:value_selection].join(" | ")}")
+    Rails.logger.info("Custom Values: #{@view[:custom_values]}")
+    Rails.logger.info("Full Values: #{full_values}")
     submitter = @view[:slack_user_id]
 
 
