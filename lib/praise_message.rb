@@ -35,7 +35,7 @@ class PraiseMessage
     users_list = @view[:user_selection].join(", ")
     case
     when @view[:value_selection].present? && @view[:custom_values].present?
-      full_values = `#{@view[:value_selection].join(" | ")} | #{@view[:custom_values]}`
+      full_values = "#{@view[:value_selection].join(" | ")} | #{@view[:custom_values]}"
     when @view[:value_selection].blank? && @view[:custom_values].present?
       full_values = @view[:custom_values]
     when @view[:value_selection].present? && @view[:custom_values].blank?
@@ -43,9 +43,6 @@ class PraiseMessage
     else
       full_values = nil
     end
-    Rails.logger.info("Values: #{@view[:value_selection].join(" | ")}")
-    Rails.logger.info("Custom Values: #{@view[:custom_values]}")
-    Rails.logger.info("Full Values: #{full_values}")
     submitter = @view[:slack_user_id]
 
 
