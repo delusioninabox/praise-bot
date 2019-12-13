@@ -89,8 +89,7 @@ RSpec.describe Api::PraiseController, type: :controller do
         "response_action": "errors",
         "errors": {
           "emoji-block": "An emoji selection is required.",
-          "user-block": "You need to select at least one user to praise.",
-          "value-block": "You need to select at least one value."
+          "user-block": "You need to select at least one user to praise."
         }
       }
     }

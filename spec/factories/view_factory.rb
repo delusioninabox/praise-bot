@@ -13,11 +13,11 @@ FactoryBot.define do
     end
 
     trait :invalid_value do
-      value_selection { [] }
+      value_selection { nil }
     end
 
     trait :invalid_user do
-      user_selection { [] }
+      user_selection { nil }
     end
 
     trait :invalid_emoji do
@@ -26,6 +26,10 @@ FactoryBot.define do
 
     trait :self_selected do
       user_selection { ["<@USER12345>", "<@USER20>"] }
+    end
+
+    trait :custom_value do
+      custom_values { ":tada: energetic | :heart: helpful" }
     end
 
     trait :posted do

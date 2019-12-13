@@ -33,7 +33,16 @@ class PraiseMessage
     comments = @view[:details]
     emoji = @view[:emoji]
     users_list = @view[:user_selection].join(", ")
-    values_list = @view[:value_selection].join(" | ")
+    case
+    when @view[:value_selection].present? && @view[:custom_values].present?
+      full_values = `#{@view[:value_selection].join(" | ")} | #{@view[:custom_values]}`
+    when @view[:value_selection].blank? && @view[:custom_values].present?
+      full_values = @view[:custom_values]
+    when @view[:value_selection].present? && @view[:custom_values].blank?
+      full_values = @view[:value_selection].join(" | ")
+    else
+      full_values = nil
+    end
     submitter = @view[:slack_user_id]
 
 
@@ -48,23 +57,28 @@ class PraiseMessage
       },
       {
         "type": "divider"
-      },
+      }
+    ];
+    if full_values.present?
+      message_blocks.push(
       {
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": "#{values_list}"
-              }
+          "text": "#{full_values}"
+        }
       },
       {
         "type": "divider"
-      },
+      });
+    end
+    message_blocks.push(
       {
         "type": "section",
         "text": {
           "type": "mrkdwn",
           "text": "#{comments}"
-              }
+        }
       },
       {
         "type": "divider"
@@ -76,7 +90,7 @@ class PraiseMessage
           "text": "_Submitted by <@#{submitter}>_"
         }
       }
-    ]
+    );
 
     # Post to Slack channel
     PraiseBot.submit(message_blocks, @view)
@@ -111,9 +125,6 @@ class PraiseMessage
     end
     if view.user_selection.present? && view.user_selection.include?("<@#{view.slack_user_id}>")
       errors << { key: "user-block", message: "You can't praise yourself! :)" }
-    end
-    if view.value_selection.blank?
-      errors << { key: "value-block", message: "You need to select at least one value." }
     end
 
     # return errors
