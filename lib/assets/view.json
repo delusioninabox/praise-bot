@@ -33,7 +33,11 @@
       "block_id": "headline-block",
       "element": {
         "action_id": "headline",
-        "type": "plain_text_input"
+        "type": "plain_text_input",
+        "placeholder": {
+            "type": "plain_text",
+            "text": "Thank you for..."
+        }
       },
       "label": {
         "type": "plain_text",
@@ -49,7 +53,7 @@
 				"type": "static_select",
 				"placeholder": {
 					"type": "plain_text",
-					"text": "Select an emoji",
+					"text": "Select an emoji (displays with above)",
 					"emoji": true
         },
         "options": [
@@ -75,7 +79,7 @@
               "text": "🙏",
               "emoji": true
             },
-            "value": "praying"
+            "value": "pray"
           },
           {
             "text": {
@@ -129,19 +133,20 @@
 			},
 			"label": {
 				"type": "plain_text",
-				"text": "Choose an emoji: (displays with above text)",
+				"text": "Choose an emoji:",
 				"emoji": true
 			}
     },
     {
       "type": "input",
+      "optional": true,
       "block_id": "value-block",
       "element": {
         "action_id": "value-selection",
 				"type": "multi_static_select",
 				"placeholder": {
 					"type": "plain_text",
-					"text": "Select value(s)",
+					"text": "Select from our company value(s)",
 					"emoji": true
         },
         "options": [
@@ -192,6 +197,28 @@
 				"text": "They exhibited:",
 				"emoji": true
 			}
+    },
+    {
+      "type": "input",
+      "optional": true,
+      "block_id": "custom-values-block",
+      "element": {
+        "action_id": "custom-values",
+        "type": "plain_text_input",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "example | value | :tada: value"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "And/Or:",
+        "emoji": true
+      },
+      "hint": {
+        "type": "plain_text",
+        "text": "Write in your own values. Emojis allowed."
+      }
     },
     {
       "type": "input",
