@@ -9,7 +9,7 @@ class Api::PraiseController < ApplicationController
 
   def create
     # Skip validation in tests
-    if Rails.env.test? === false
+    unless Rails.env.test?
       # Is this a valid Slack request?
       if invalid_signature!
         return
