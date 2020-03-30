@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_204619) do
+ActiveRecord::Schema.define(version: 2020_03_30_170525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "users", force: :cascade do |t|
+    t.string "slack_id"
+    t.string "display_name"
+    t.string "actual_name"
+    t.boolean "is_group"
+    t.index ["slack_id"], name: "index_users_on_slack_id", unique: true
+  end
 
   create_table "views", force: :cascade do |t|
     t.string "view_id"
