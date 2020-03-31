@@ -24,8 +24,6 @@ class TeamMembers
     # actual_name is null
     # is_group is true
     # save as user
-    # data.response_metadata.next_cursor => page
-    # if next_cursor is empty string, stop
-    # if not empty, call syncUserGroups(next_cursor)
+    # user groups api does not have pagination (at this time)
   end
 end
