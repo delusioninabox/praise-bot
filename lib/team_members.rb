@@ -13,7 +13,7 @@ class TeamMembers
     }
     @data.members.save
 
-    unless @data.response_metadata.next_cursor.empty?
+    if @data.response_metadata.next_cursor.present?
       # if next_cursor (page) exists
       this.syncUsers(@data.response_metadata.next_cursor)
     end
@@ -24,7 +24,7 @@ class TeamMembers
 
     @data.usergroups.map { |item|
       user = User.where(slack_id: item.id).first_or_initialize
-      user.assign_attributes({ display_name: item.name, actual_name: null, is_group: true })
+      user.assign_attributes({ display_name: item.name, is_group: true })
       return user
     }
 
