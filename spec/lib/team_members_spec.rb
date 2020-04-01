@@ -145,13 +145,92 @@ RSpec.describe TeamMembers do
     end
   end
 
+  ##########################################################
+
   context '.syncUserGroups' do
+    let(:group_response) { instance_double(HTTParty::Response, body: group_response_body) }
+    let(:group_response_body) {
+      {
+        "ok": true,
+        "usergroups": [
+            {
+                "id": "S0614TZR7",
+                "team_id": "T060RNRCH",
+                "is_usergroup": true,
+                "name": "Team Admins",
+                "description": "A group of all Administrators on your team.",
+                "handle": "admins",
+                "is_external": false,
+                "date_create": 1446598059,
+                "date_update": 1446670362,
+                "date_delete": 0,
+                "auto_type": "admin",
+                "created_by": "USLACKBOT",
+                "updated_by": "U060RNRCZ",
+                "prefs": {
+                    "channels": [],
+                    "groups": []
+                },
+                "user_count": "2"
+            },
+            {
+                "id": "S06158AV7",
+                "team_id": "T060RNRCH",
+                "is_usergroup": true,
+                "name": "Team Owners",
+                "description": "A group of all Owners on your team.",
+                "handle": "owners",
+                "is_external": false,
+                "date_create": 1446678371,
+                "date_update": 1446678371,
+                "date_delete": 0,
+                "auto_type": "owner",
+                "created_by": "USLACKBOT",
+                "updated_by": "USLACKBOT",
+                "prefs": {
+                    "channels": [],
+                    "groups": []
+                },
+                "user_count": "1"
+            },
+            {
+                "id": "S0615G0KT",
+                "team_id": "T060RNRCH",
+                "is_usergroup": true,
+                "name": "Marketing Team",
+                "description": "Marketing gurus, PR experts and product advocates.",
+                "handle": "marketing-team",
+                "is_external": false,
+                "date_create": 1446746793,
+                "date_update": 1446747767,
+                "date_delete": 1446748865,
+                "created_by": "U060RNRCZ",
+                "updated_by": "U060RNRCZ",
+                "prefs": {
+                    "channels": [],
+                    "groups": []
+                },
+                "user_count": "0"
+            }
+        ]
+    } }
+
+    before do
+      allow(HTTParty).to receive(:get).
+        and_return(group_response)
+    end
+
     it 'retrieves and creates user groups as users' do
-      # calls .get with correct values
-      # creates users
+      subject.class.syncUserGroups
+      expect(User.all.count).to eq(3)
     end
 
     it 'retrieves and updates existing user groups' do
+      group_response_body[:usergroups][0][:handle] = "theboss"
+      FactoryBot.create(:user, :is_group)
+      subject.class.syncUserGroups
+      expect(User.all.count).to eq(3)
+      expect(User.all.first[:display_name]).to eq("theboss")
     end
   end
 end

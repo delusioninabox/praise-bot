@@ -7,8 +7,8 @@ FactoryBot.define do
 
     trait :is_group do
       slack_id { "S0614TZR7" }
-      display_name { "Team Admins" }
-      actual_name { nil }
+      display_name { "admins" }
+      actual_name { "Team Admins" }
       is_group { true }
     end
   end

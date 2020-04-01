@@ -23,11 +23,9 @@ class TeamMembers
 
     @data[:usergroups].map { |item|
       user = User.where(slack_id: item[:id]).first_or_initialize
-      user.assign_attributes({ display_name: item[:name], is_group: true })
-      return user
+      user.assign_attributes({ display_name: item[:handle], actual_name: item[:name], is_group: true })
+      user.save
     }
-
-    @data[:usergroups].save
     # user groups api does not have pagination (at this time)
   end
 end
