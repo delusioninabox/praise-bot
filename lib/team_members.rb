@@ -20,7 +20,6 @@ class TeamMembers
       }
 
       if @data[:response_metadata][:next_cursor].present?
-        puts @data[:response_metadata][:next_cursor]
         # if next_cursor (page) exists
         self.syncUsers(@data[:response_metadata][:next_cursor])
       end
