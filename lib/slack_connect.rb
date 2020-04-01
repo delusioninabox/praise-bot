@@ -12,7 +12,7 @@ class SlackConnect
       if page.present?
         url+= "&cursor=#{page}"
       end
-      response = HTTParty.get(url, options)
+      response = HTTParty.get(url)
       return response.body
     rescue => e
       puts e
