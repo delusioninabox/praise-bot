@@ -6,7 +6,7 @@ class TeamMembers
   def self.syncUsers(page)
     @data = SlackConnect.get('users.list', @@limit, page)
 
-    if @data[:members].present? do
+    if @data[:members].present?
       @data[:members].map { |item|
         user = User.where(slack_id: item[:id]).first_or_initialize
         user.assign_attributes({
@@ -29,7 +29,7 @@ class TeamMembers
     # user groups api does not have pagination (at this time)
     @data = SlackConnect.get('usergroups.list', @@limit, nil)
 
-    if @data[:usergroups].present? do
+    if @data[:usergroups].present?
       @data[:usergroups].map { |item|
         user = User.where(slack_id: item[:id]).first_or_initialize
         user.assign_attributes({
