@@ -8,7 +8,12 @@ class TeamMembers
 
     @data[:members].map { |item|
       user = User.where(slack_id: item[:id]).first_or_initialize
-      user.assign_attributes({ display_name: item[:name], actual_name: item[:profile][:real_name_normalized], is_group: false })
+      user.assign_attributes({
+        display_name: item[:name],
+        actual_name: item[:profile][:real_name_normalized],
+        is_group: false,
+        is_deleted: item[:deleted]
+      })
       user.save
     }
 
@@ -19,13 +24,20 @@ class TeamMembers
   end
 
   def self.syncUserGroups
+    # user groups api does not have pagination (at this time)
     @data = SlackConnect.get('usergroups.list', @@limit, nil)
 
     @data[:usergroups].map { |item|
       user = User.where(slack_id: item[:id]).first_or_initialize
-      user.assign_attributes({ display_name: item[:handle], actual_name: item[:name], is_group: true })
+      user.assign_attributes({
+        display_name: item[:handle],
+        actual_name: item[:name],
+        is_group: true
+      })
+      if item[:deleted_by].present?
+        user.assign_attributes({ is_deleted: true })
+      end
       user.save
     }
-    # user groups api does not have pagination (at this time)
   end
 end

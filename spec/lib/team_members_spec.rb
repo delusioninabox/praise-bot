@@ -38,6 +38,7 @@ RSpec.describe TeamMembers do
             "id": "W07QCRPA4",
             "team_id": "T0G9PQBBK",
             "name": "glinda",
+            "deleted": false,
             "profile": {
                 "avatar_hash": "8fbdd10b41c6",
                 "first_name": "Glinda",
@@ -95,6 +96,7 @@ RSpec.describe TeamMembers do
             "id": "889QCRPA4",
             "team_id": "T0G9PQBBK",
             "name": "angel",
+            "deleted": false,
             "profile": {
                 "first_name": "Aziraphale",
                 "last_name": "Heaven",

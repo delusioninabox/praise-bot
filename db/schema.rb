@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_170525) do
     t.string "display_name"
     t.string "actual_name"
     t.boolean "is_group"
+    t.boolean "is_deleted", default: false
     t.index ["slack_id"], name: "index_users_on_slack_id", unique: true
   end
 
