@@ -131,9 +131,11 @@ RSpec.describe TeamMembers do
 
     it 'retrieves and updates existing users' do
       first_response_body[:response_metadata][:next_cursor] = ""
+      first_response_body[:members][0][:name] = "jeff"
       FactoryBot.create(:user)
       subject.class.syncUsers(nil)
       expect(User.all.count).to eq(2)
+      expect(User.all.first[:display_name]).to eq("jeff")
       expect(TeamMembers).not_to receive(:syncUsers)
     end
 
