@@ -12,7 +12,7 @@ RSpec.describe SlackConnect do
       ENV["slack_bot_auth"] = "12345"
       limit = nil
       allow(HTTParty).to receive(:get).
-        with('https://slack.com/api/methods/users.list?token=12345').
+        with('https://slack.com/api/users.list?token=12345').
         and_return(slack_response)
       subject.class.get(slack_method, limit, page)
       ENV["slack_bot_auth"] = cached_slack_token
@@ -23,7 +23,7 @@ RSpec.describe SlackConnect do
       cached_slack_token = ENV["slack_bot_auth"]
       ENV["slack_bot_auth"] = "12345"
       allow(HTTParty).to receive(:get).
-        with('https://slack.com/api/methods/users.list?token=12345&limit=100').
+        with('https://slack.com/api/users.list?token=12345&limit=100').
         and_return(slack_response)
       subject.class.get(slack_method, limit, page)
       ENV["slack_bot_auth"] = cached_slack_token
@@ -34,7 +34,7 @@ RSpec.describe SlackConnect do
       ENV["slack_bot_auth"] = "12345"
       page = 'cde45'
       allow(HTTParty).to receive(:get).
-        with('https://slack.com/api/methods/users.list?token=12345&limit=100&cursor=cde45').
+        with('https://slack.com/api/users.list?token=12345&limit=100&cursor=cde45').
         and_return(slack_response)
       subject.class.get(slack_method, limit, page)
       ENV["slack_bot_auth"] = cached_slack_token
@@ -46,7 +46,7 @@ RSpec.describe SlackConnect do
       ENV["slack_bot_auth"] = "12345"
       slack_method = 'usergroups.list'
       allow(HTTParty).to receive(:get).
-        with('https://slack.com/api/methods/usergroups.list?token=12345&limit=100').
+        with('https://slack.com/api/usergroups.list?token=12345&limit=100').
         and_return(slack_response)
       subject.class.get(slack_method, limit, page)
       ENV["slack_bot_auth"] = cached_slack_token

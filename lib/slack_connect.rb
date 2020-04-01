@@ -5,7 +5,7 @@ class SlackConnect
     token = ENV["slack_bot_auth"]
     begin
       Rails.logger.info("Retrieving from #{slack_method}")
-      url = "https://slack.com/api/methods/#{slack_method}?token=#{token}"
+      url = "https://slack.com/api/#{slack_method}?token=#{token}"
       if limit.present?
         url += "&limit=#{limit}"
       end
@@ -16,7 +16,10 @@ class SlackConnect
       return response.body
     rescue => e
       puts e
-      return null
+      return {
+        members: [],
+        usergroups: []
+      }
     end
   end
 end

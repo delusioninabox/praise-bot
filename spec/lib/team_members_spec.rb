@@ -1,8 +1,6 @@
 RSpec.describe TeamMembers do
 
   context '.syncUsers' do
-    let(:first_response) { instance_double(HTTParty::Response, body: first_response_body) }
-    let(:second_response) { instance_double(HTTParty::Response, body: second_response_body) }
     let(:first_response_body) {
       {
       "ok": true,
@@ -119,13 +117,12 @@ RSpec.describe TeamMembers do
     }
     } }
 
-    before do
-      allow(HTTParty).to receive(:get).
-        and_return(first_response, second_response)
-    end
-
     it 'retrieves and creates list of users' do
       first_response_body[:response_metadata][:next_cursor] = ""
+      first_response = instance_double(HTTParty::Response, body: first_response_body.to_json)
+      second_response = instance_double(HTTParty::Response, body: second_response_body.to_json)
+      allow(HTTParty).to receive(:get).
+        and_return(first_response, second_response)
       subject.class.syncUsers(nil)
       expect(User.all.count).to eq(2)
       expect(TeamMembers).not_to receive(:syncUsers)
@@ -135,6 +132,10 @@ RSpec.describe TeamMembers do
       first_response_body[:response_metadata][:next_cursor] = ""
       first_response_body[:members][0][:name] = "jeff"
       FactoryBot.create(:user)
+      first_response = instance_double(HTTParty::Response, body: first_response_body.to_json)
+      second_response = instance_double(HTTParty::Response, body: second_response_body.to_json)
+      allow(HTTParty).to receive(:get).
+        and_return(first_response, second_response)
       subject.class.syncUsers(nil)
       expect(User.all.count).to eq(2)
       expect(User.all.first[:display_name]).to eq("jeff")
@@ -142,6 +143,10 @@ RSpec.describe TeamMembers do
     end
 
     it 'requests next page if present' do
+      first_response = instance_double(HTTParty::Response, body: first_response_body.to_json)
+      second_response = instance_double(HTTParty::Response, body: second_response_body.to_json)
+      allow(HTTParty).to receive(:get).
+        and_return(first_response, second_response)
       subject.class.syncUsers(nil)
       expect(User.all.count).to eq(4)
     end
@@ -150,7 +155,6 @@ RSpec.describe TeamMembers do
   ##########################################################
 
   context '.syncUserGroups' do
-    let(:group_response) { instance_double(HTTParty::Response, body: group_response_body) }
     let(:group_response_body) {
       {
         "ok": true,
@@ -217,12 +221,10 @@ RSpec.describe TeamMembers do
         ]
     } }
 
-    before do
+    it 'retrieves and creates user groups as users' do
+      group_response = instance_double(HTTParty::Response, body: group_response_body.to_json)
       allow(HTTParty).to receive(:get).
         and_return(group_response)
-    end
-
-    it 'retrieves and creates user groups as users' do
       subject.class.syncUserGroups
       expect(User.all.count).to eq(3)
     end
@@ -230,6 +232,9 @@ RSpec.describe TeamMembers do
     it 'retrieves and updates existing user groups' do
       group_response_body[:usergroups][0][:handle] = "theboss"
       FactoryBot.create(:user, :is_group)
+      group_response = instance_double(HTTParty::Response, body: group_response_body.to_json)
+      allow(HTTParty).to receive(:get).
+        and_return(group_response)
       subject.class.syncUserGroups
       expect(User.all.count).to eq(3)
       expect(User.all.first[:display_name]).to eq("theboss")

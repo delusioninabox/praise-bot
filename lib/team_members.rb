@@ -5,6 +5,7 @@ class TeamMembers
 
   def self.syncUsers(page)
     @data = SlackConnect.get('users.list', @@limit, page)
+    @data = JSON.parse(@data,:symbolize_names => true)
 
     if @data[:members].present?
       @data[:members].map { |item|
@@ -19,6 +20,7 @@ class TeamMembers
       }
 
       if @data[:response_metadata][:next_cursor].present?
+        puts @data[:response_metadata][:next_cursor]
         # if next_cursor (page) exists
         self.syncUsers(@data[:response_metadata][:next_cursor])
       end
@@ -28,6 +30,7 @@ class TeamMembers
   def self.syncUserGroups
     # user groups api does not have pagination (at this time)
     @data = SlackConnect.get('usergroups.list', @@limit, nil)
+    @data = JSON.parse(@data,:symbolize_names => true)
 
     if @data[:usergroups].present?
       @data[:usergroups].map { |item|
