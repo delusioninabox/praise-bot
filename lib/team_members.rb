@@ -29,7 +29,7 @@ class TeamMembers
     # user groups api does not have pagination (at this time)
     @data = SlackConnect.get('usergroups.list', @@limit, nil)
 
-    if @data[:usergroups].present?
+    if @data[:usergroups].present? do
       @data[:usergroups].map { |item|
         user = User.where(slack_id: item[:id]).first_or_initialize
         user.assign_attributes({
