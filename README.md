@@ -24,7 +24,7 @@ After finishing steps 3 and 4, you can run locally with `rails s`. The API can b
 Deploy your app to Heroku or another site. You can use Heroku's CLI, or deploy from your forked repo. Add the following add-ons:
 1. Postgres (required)
 2. Heroku Scheduler (recommended for running tasks, but you can use something else)
-  - Create a task to run `rake sync_users:get_users && rake sync_users:get_user_groups` once a week.
+  - Create a task to run `rake sync_users:get_users sync_users:get_user_groups` once a week.
 3. Papertrail (recommended)
 
 ## 3. Adding To Slack
