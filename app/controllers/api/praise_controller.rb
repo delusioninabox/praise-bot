@@ -9,10 +9,11 @@ class Api::PraiseController < ApplicationController
   layout false
 
   def create
-    # Skip validation in tests
-    unless Rails.env.test?
+    # Skip validation in tests or local
+    unless Rails.env.test? || Rails.env.development?
       # Is this a valid Slack request?
-      if SlackVerification.invalid_signature!
+      if SlackVerification.invalid_signature!(request)
+        render json: {}, status: :unauthorized
         return
       end
     end

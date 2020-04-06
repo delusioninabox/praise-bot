@@ -54,7 +54,9 @@ _**---- Do NOT commit this file. ----**_
 ## 5. Making The Bot Live
 1. Back in the bot's Slack App settings, go to `Interactive Components`. Turn `interactivity` on and add a request URL with your deployed environment. It should look like this: `https://deployed-domain.com/api/praise`
 
-2. Next go to `Slash Commands` and add a new slash command. Make the command `/praise` (or `/kudos` if you'd rather). *The request URL will be same as the URL you used above.*
+2. On this same page (`Interactive Components`), add a request URL under `Select Menus` for our users and user groups using your deployed environment. It should look like this: `https://deployed-domain.com/api/user`
+
+3. Next go to `Slash Commands` and add a new slash command. Make the command `/praise` (or `/kudos` if you'd rather). *The request URL will be same as the URL you used above.*
 
 Make sure it's installed in the team's workspace, you update bot's display name/image, and you're good to go!
 
