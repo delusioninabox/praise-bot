@@ -13,7 +13,8 @@ class Api::UserController < ApplicationController
       end
     end
 
-    search = params[:query]
+    payload = JSON.parse(params[:payload],:symbolize_names => true)
+    search = payload[:value]
     if search.present?
       @list = User.where("display_name ILIKE '%#{search}%' OR actual_name ILIKE '%#{search}%'").order('display_name asc')
     else

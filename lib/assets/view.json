@@ -25,7 +25,8 @@
           "type": "plain_text",
           "text": "Select user(s) and/or group(s)"
         }
-      }
+      },
+      "min_query_length": 1
     },
     {
       "type": "input",
