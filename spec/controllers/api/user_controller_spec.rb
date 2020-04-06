@@ -10,6 +10,13 @@ RSpec.describe Api::UserController, type: :controller do
         body = JSON.parse(response.body,:symbolize_names => true)
         expect(body[:options].count).to eq(5)
       end
+
+      it 'does not return deleted users' do
+        FactoryBot.create(:user, :is_deleted)
+        post :create
+        body = JSON.parse(response.body,:symbolize_names => true)
+        expect(body[:options].count).to eq(5)
+      end
     end
 
     context "when returning all users" do
@@ -48,6 +55,14 @@ RSpec.describe Api::UserController, type: :controller do
         post :create, :params => params
         body = JSON.parse(response.body,:symbolize_names => true)
         expect(body[:options].count).to eq(2)
+      end
+
+      it 'does not return deleted users' do
+        FactoryBot.create(:user, :is_deleted, display_name: "thebots")
+        params = { payload: { value: "bots" }.to_json }
+        post :create, :params => params
+        body = JSON.parse(response.body,:symbolize_names => true)
+        expect(body[:options].count).to eq(1)
       end
 
       it 'is case in-sensitive' do

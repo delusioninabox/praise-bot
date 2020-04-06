@@ -11,5 +11,9 @@ FactoryBot.define do
       actual_name { Faker::Book.title }
       is_group { true }
     end
+
+    trait :is_deleted do
+      is_deleted { true }
+    end
   end
 end

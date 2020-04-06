@@ -18,9 +18,9 @@ class Api::UserController < ApplicationController
       search = payload[:value]
     end
     if search.present?
-      @list = User.where("display_name ILIKE '%#{search}%' OR actual_name ILIKE '%#{search}%'").order('display_name asc')
+      @list = User.where(is_deleted: false).where("display_name ILIKE '%#{search}%' OR actual_name ILIKE '%#{search}%'").order('display_name asc')
     else
-      @list = User.all.order('display_name asc')
+      @list = User.all.where(is_deleted: false).order('display_name asc')
     end
     options = Array.new
     @list.each { |user|
