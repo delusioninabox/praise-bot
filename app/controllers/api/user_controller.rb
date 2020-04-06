@@ -2,13 +2,24 @@ class Api::UserController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @list = User.all
+    search = params[:query]
+    if search.present?
+      @list = User.where("display_name ILIKE '%#{search}%' OR actual_name ILIKE '%#{search}%'").order('display_name asc')
+    else
+      @list = User.all.order('display_name asc')
+    end
     options = Array.new
     @list.each { |user|
+      display = user.display_name
+      actual = user.actual_name
+      if search.present?
+        display = display.gsub(/#{search}/i, "*#{search}*")
+        actual = actual.gsub(/#{search}/i, "*#{search}*")
+      end
       options << {
         text: {
         type: "plain_text",
-        text: "#{user.display_name} (#{user.actual_name})"
+        text: "#{display} (#{actual})"
         },
         value: user.slack_id
       }
