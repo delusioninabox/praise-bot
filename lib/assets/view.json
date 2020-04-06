@@ -18,7 +18,7 @@
 				"text": "I want to praise:",
 				"emoji": true
       },
-      "accessory": {
+      "element": {
         "action_id": "user-selection",
         "type": "multi_external_select",
         "placeholder": {
