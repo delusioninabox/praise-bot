@@ -6,8 +6,8 @@ RSpec.describe ProcessValues do
           "user-selection": {
             "type": "multi_external_select",
             "selected_options": [
-              "UA2222",
-              "UA3333"
+              { "value": "UA2222" },
+              { "value": "UA3333" }
             ]
           }
         }
