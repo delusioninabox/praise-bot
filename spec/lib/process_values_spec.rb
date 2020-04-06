@@ -4,8 +4,8 @@ RSpec.describe ProcessValues do
       {
         "user-block": {
           "user-selection": {
-            "type": "multi_users_select",
-            "selected_users": [
+            "type": "multi_external_select",
+            "selected_options": [
               "UA2222",
               "UA3333"
             ]

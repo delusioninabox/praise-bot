@@ -23,6 +23,10 @@ class ProcessValues
         value = action['selected_users'].each_with_object([]) do |user, array|
           array << "<@#{user}>"
         end
+      when action['type'] == 'multi_external_select' && action['selected_options'].present?
+        value = action['selected_options'].each_with_object([]) do |user, array|
+          array << "<@#{user['value']}>"
+        end
       else # text input
         value = action['value']
       end
