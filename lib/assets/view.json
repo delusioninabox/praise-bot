@@ -13,20 +13,19 @@
     {
       "type": "input",
       "block_id": "user-block",
-      "element": {
-        "action_id": "user-selection",
-				"type": "multi_users_select",
-				"placeholder": {
-					"type": "plain_text",
-					"text": "Select user(s)",
-					"emoji": true
-				}
-			},
-			"label": {
+      "label": {
 				"type": "plain_text",
 				"text": "I want to praise:",
 				"emoji": true
-			}
+      },
+      "accessory": {
+        "action_id": "user-selection",
+        "type": "multi_external_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select user(s) and/or group(s)"
+        }
+      }
     },
     {
       "type": "input",
