@@ -1,13 +1,13 @@
 RSpec.describe ProcessValues do
-  context "sending multi user select" do
+  context "sending multi external select" do
     let(:actions) {
       {
         "user-block": {
           "user-selection": {
             "type": "multi_external_select",
             "selected_options": [
-              { "value": "UA2222" },
-              { "value": "UA3333" }
+              { "value": "<!subteam^UA2222>" },
+              { "value": "<@UA3333>" }
             ]
           }
         }
@@ -17,7 +17,7 @@ RSpec.describe ProcessValues do
     it("saves an array of users") do
       subject.class.save(actions, view)
       updated_view = View.find_by({ view_id: view.view_id })
-      expect(updated_view.user_selection).to eq(["<@UA2222>", "<@UA3333>"])
+      expect(updated_view.user_selection).to eq(["<!subteam^UA2222>", "<@UA3333>"])
     end
   end
 

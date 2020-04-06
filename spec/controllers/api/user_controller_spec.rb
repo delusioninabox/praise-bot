@@ -19,6 +19,17 @@ RSpec.describe Api::UserController, type: :controller do
       end
     end
 
+    context "when returning values" do
+      let!(:user) { FactoryBot.create(:user, display_name: "afreddie", actual_name: "Frederick Allonsy Boi")}
+      let!(:group) { FactoryBot.create(:user, :is_group, display_name: "ballbots", actual_name: "The Bot Crew")}
+      it 'returns users as <@ID> and teams as <!subteam^ID>' do
+        post :create
+        body = JSON.parse(response.body,:symbolize_names => true)
+        expect(body[:options][0][:value]).to eq("<@#{user.slack_id}>")
+        expect(body[:options][1][:value]).to eq("<!subteam^#{group.slack_id}>")
+      end
+    end
+
     context "when returning all users" do
       let!(:match_user) { FactoryBot.create(:user, display_name: "defg", actual_name: "Dog Energy For Good")}
       let!(:match_group) { FactoryBot.create(:user, display_name: "abc", actual_name: "Your ABCs")}
@@ -32,9 +43,9 @@ RSpec.describe Api::UserController, type: :controller do
 
     context "with search queries" do
       let!(:users) { FactoryBot.create_list(:user, 3) }
-      let!(:match_user) { FactoryBot.create(:user, display_name: "freddie", actual_name: "Frederick Allonsy Boi")}
+      let!(:match_user) { FactoryBot.create(:user, display_name: "freddie", actual_name: "Frederick Allllllonsy Boi")}
       let!(:groups) { FactoryBot.create_list(:user, 2, :is_group) }
-      let!(:match_group) { FactoryBot.create(:user, display_name: "allbots", actual_name: "The Bot Crew")}
+      let!(:match_group) { FactoryBot.create(:user, display_name: "allllllbots", actual_name: "The Bot Crew")}
 
       it 'returns match in display name' do
         params = { payload: { value: "bots" }.to_json }
@@ -51,7 +62,7 @@ RSpec.describe Api::UserController, type: :controller do
       end
 
       it 'returns matches in either display or actual' do
-        params = { payload: { value: "all" }.to_json }
+        params = { payload: { value: "allllll" }.to_json }
         post :create, :params => params
         body = JSON.parse(response.body,:symbolize_names => true)
         expect(body[:options].count).to eq(2)

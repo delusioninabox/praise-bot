@@ -24,12 +24,17 @@ class Api::UserController < ApplicationController
     end
     options = Array.new
     @list.each { |user|
+      if user[:is_group]
+        formatted_value = "<!subteam^#{user.slack_id}>"
+      else
+        formatted_value = "<@#{user.slack_id}>"
+      end
       options << {
         text: {
         type: "plain_text",
         text: "#{user.display_name} (#{user.actual_name})"
         },
-        value: user.slack_id
+        value: formatted_value
       }
     }
     render json: {
