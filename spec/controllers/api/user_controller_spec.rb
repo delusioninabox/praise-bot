@@ -30,28 +30,28 @@ RSpec.describe Api::UserController, type: :controller do
       let!(:match_group) { FactoryBot.create(:user, display_name: "allbots", actual_name: "The Bot Crew")}
 
       it 'returns match in display name' do
-        params = { query: "bots" }
+        params = { payload: { value: "bots" }.to_json }
         post :create, :params => params
         body = JSON.parse(response.body,:symbolize_names => true)
         expect(body[:options].count).to eq(1)
       end
 
       it 'returns match in actual name' do
-        params = { query: "Bot Crew" }
+        params = { payload: { value: "Bot Crew" }.to_json }
         post :create, :params => params
         body = JSON.parse(response.body,:symbolize_names => true)
         expect(body[:options].count).to eq(1)
       end
 
       it 'returns matches in either display or actual' do
-        params = { query: "all" }
+        params = { payload: { value: "all" }.to_json }
         post :create, :params => params
         body = JSON.parse(response.body,:symbolize_names => true)
         expect(body[:options].count).to eq(2)
       end
 
       it 'is case in-sensitive' do
-        params = { query: "BOT CREW" }
+        params = { payload: { value: "BOT CREW" }.to_json }
         post :create, :params => params
         body = JSON.parse(response.body,:symbolize_names => true)
         expect(body[:options].count).to eq(1)
