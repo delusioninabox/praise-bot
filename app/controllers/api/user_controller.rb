@@ -30,7 +30,7 @@ class Api::UserController < ApplicationController
       end
       options << {
         text: {
-        type: "plain_text",
+        type: "mrkdwn",
         text: "#{display} (#{actual})"
         },
         value: user.slack_id
