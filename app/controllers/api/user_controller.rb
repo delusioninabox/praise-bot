@@ -22,16 +22,10 @@ class Api::UserController < ApplicationController
     end
     options = Array.new
     @list.each { |user|
-      display = user.display_name
-      actual = user.actual_name
-      if search.present?
-        display = display.gsub(/#{search}/i, "*#{search}*")
-        actual = actual.gsub(/#{search}/i, "*#{search}*")
-      end
       options << {
         text: {
-        type: "mrkdwn",
-        text: "#{display} (#{actual})"
+        type: "plain_text",
+        text: "#{user.display_name} (#{user.actual_name})"
         },
         value: user.slack_id
       }

@@ -56,14 +56,6 @@ RSpec.describe Api::UserController, type: :controller do
         body = JSON.parse(response.body,:symbolize_names => true)
         expect(body[:options].count).to eq(1)
       end
-
-      it 'is bolds the match' do
-        params = { query: "all" }
-        post :create, :params => params
-        body = JSON.parse(response.body,:symbolize_names => true)
-        expect(body[:options][0][:text][:text]).to eq("*all*bots (The Bot Crew)")
-        expect(body[:options][1][:text][:text]).to eq("freddie (Frederick *all*onsy Boi)")
-      end
     end
 
   end
