@@ -33,7 +33,7 @@ Create a new App to your workspace for Praise Bot.
 ## 4. The Bot
 1. Add a bot user under `Features & Functionality`. Then go to `OAuth & Permissions` to find your bot's auth key.
 
-2. Under this section, be sure the bot has permission to: `usergroups:read`, `users.profile:read`, `users:read`, `chat:write`, and `chat:write.customize`.
+2. Under this section, be sure the bot has permission to: `usergroups:read`, `users.profile:read`, `users:read`, `chat:write`, `chat:write.public`, and `chat:write.customize`.
 
 3. Run `bundle exec figaro install` to generate a `config/application.yml` file. Add the following ENV (environment) variables to this file locally.
 
