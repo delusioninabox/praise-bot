@@ -2,7 +2,7 @@
 class SlackVerification
   # courtesy of jmanian on github
   # https://github.com/slack-ruby/slack-ruby-client/issues/238#issuecomment-442981145
-  def self.invalid_signature!
+  def self.invalid_signature!(request)
     signing_secret = ENV['slack_secret_signature']
     version_number = 'v0' # always v0 for now
     timestamp = request.headers['X-Slack-Request-Timestamp']
@@ -10,7 +10,6 @@ class SlackVerification
 
     if Time.at(timestamp.to_i) < 5.minutes.ago
       # could be a replay attack
-      render json: {}, status: :bad_request
       return true
     end
 
@@ -21,7 +20,6 @@ class SlackVerification
     slack_signature = request.headers['X-Slack-Signature']
 
     if computed_signature != slack_signature
-      render json: {}, status: :unauthorized
       return true
     end
     return false

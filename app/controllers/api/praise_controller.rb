@@ -12,7 +12,8 @@ class Api::PraiseController < ApplicationController
     # Skip validation in tests
     unless Rails.env.test?
       # Is this a valid Slack request?
-      if SlackVerification.invalid_signature!
+      if SlackVerification.invalid_signature!(request)
+        render json: {}, status: :unauthorized
         return
       end
     end
