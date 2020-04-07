@@ -10,6 +10,10 @@ class TeamMembers
     if @data[:members].present?
       @data[:members].map { |item|
         user = User.where(slack_id: item[:id]).first_or_initialize
+        name = item[:profile][:display_name]
+        if name.empty?
+          name = item[:name]
+        end
         user.assign_attributes({
           display_name: item[:profile][:display_name],
           actual_name: item[:profile][:real_name_normalized],
