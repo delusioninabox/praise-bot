@@ -29,13 +29,20 @@ class Api::UserController < ApplicationController
       else
         formatted_value = "<@#{user.slack_id}>"
       end
-      options << {
-        text: {
-        type: "plain_text",
-        text: "#{user.display_name} (#{user.actual_name})"
-        },
-        value: formatted_value
-      }
+      if user.display_name.present?
+        display_message = "#{user.display_name} (#{user.actual_name})"
+      else
+        display_message = "#{user.actual_name}"
+      end
+      if display_message.present?
+        options << {
+          text: {
+          type: "plain_text",
+          text: display_message
+          },
+          value: formatted_value
+        }
+      end
     }
     render json: {
       options: options
