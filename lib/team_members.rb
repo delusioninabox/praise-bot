@@ -11,7 +11,7 @@ class TeamMembers
       @data[:members].map { |item|
         user = User.where(slack_id: item[:id]).first_or_initialize
         user.assign_attributes({
-          display_name: item[:name],
+          display_name: item[:profile][:display_name],
           actual_name: item[:profile][:real_name_normalized],
           is_group: false,
           is_deleted: item[:deleted]

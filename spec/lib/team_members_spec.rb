@@ -97,6 +97,7 @@ RSpec.describe TeamMembers do
             "deleted": false,
             "profile": {
                 "first_name": "Aziraphale",
+                "display_name": "angel",
                 "last_name": "Heaven",
                 "real_name": "Aziraphale Heaven",
                 "real_name_normalized": "Aziraphale Heaven",
@@ -130,7 +131,7 @@ RSpec.describe TeamMembers do
 
     it 'retrieves and updates existing users' do
       first_response_body[:response_metadata][:next_cursor] = ""
-      first_response_body[:members][0][:name] = "jeff"
+      first_response_body[:members][0][:profile][:display_name] = "jeff"
       FactoryBot.create(:user, slack_id: "W012A3CDE", display_name: "spengler", actual_name: "Egon Spengler")
       first_response = instance_double(HTTParty::Response, body: first_response_body.to_json)
       second_response = instance_double(HTTParty::Response, body: second_response_body.to_json)
