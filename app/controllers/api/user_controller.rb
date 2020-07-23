@@ -2,51 +2,71 @@ require 'slack_verification'
 
 class Api::UserController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :validate_slack
 
   def create
-    # Skip validation in tests and local
-    unless Rails.env.test? || Rails.env.development?
-      # Is this a valid Slack request?
-      if SlackVerification.invalid_signature!(request)
-        render json: {}, status: :unauthorized
-        return
-      end
-    end
-
-    if params[:payload].present?
-      payload = JSON.parse(params[:payload], :symbolize_names => true)
-      search = payload[:value]
-    end
-    if search.present?
-      @list = User.where(is_deleted: false).where("display_name ILIKE '%#{search}%' OR actual_name ILIKE '%#{search}%'").order('display_name asc')
-    else
-      @list = User.all.where(is_deleted: false).order('display_name asc')
-    end
     options = Array.new
-    @list.each { |user|
-      if user[:is_group]
-        formatted_value = "<!subteam^#{user.slack_id}>"
-      else
-        formatted_value = "<@#{user.slack_id}>"
-      end
-      if user.display_name.present?
-        display_message = "#{user.display_name} (#{user.actual_name})"
-      else
-        display_message = "#{user.actual_name}"
-      end
-      if display_message.present?
+    user_list.each { |user|
+      display_name = user_name(user)
+      if display_name.present?
         options << {
           text: {
           type: "plain_text",
-          text: display_message
+          text: display_name
           },
-          value: formatted_value
+          value: formatted_slack_name(user)
         }
       end
     }
     render json: {
       options: options
     }.to_json
+  end
+
+  private
+
+  def validate_slack
+    SlackVerification.validate_slack!(request)
+  end
+
+  def payload
+    if params[:payload].present?
+      JSON.parse(params[:payload], :symbolize_names => true)
+    else
+      nil
+    end
+  end
+
+  def search
+    if payload.present?
+      payload[:value]
+    else
+      nil
+    end
+  end
+
+  def user_list
+    if search.present?
+      User.where(is_deleted: false).where("display_name ILIKE '%#{search}%' OR actual_name ILIKE '%#{search}%'").order('display_name asc')
+    else
+      User.all.where(is_deleted: false).order('display_name asc')
+    end
+  end
+
+  def formatted_slack_name(user)
+    if user[:is_group].present?
+      "<!subteam^#{user[:slack_id]}>"
+    else
+      "<@#{user[:slack_id]}>"
+    end
+  end
+
+  def user_name(user)
+    if user[:display_name].present?
+      "#{user[:display_name]} (#{user[:actual_name]})"
+    else
+      "#{user[:actual_name]}"
+    end
   end
 
 end

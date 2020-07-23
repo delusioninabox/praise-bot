@@ -48,6 +48,7 @@ group :development, :test do
   gem 'timecop'
   gem 'factory_bot_rails'
   gem 'shoulda-matchers'
+  gem 'faker'
 end
 
 group :development do

@@ -28,72 +28,10 @@ class PraiseMessage
       end
     end
 
-    # Process values
-    headline = @view[:headline]
-    comments = @view[:details]
-    emoji = @view[:emoji]
-    users_list = @view[:user_selection].join(", ")
-    case
-    when @view[:value_selection].present? && @view[:custom_values].present?
-      full_values = "#{@view[:value_selection].join(" | ")} | #{@view[:custom_values]}"
-    when @view[:value_selection].blank? && @view[:custom_values].present?
-      full_values = @view[:custom_values]
-    when @view[:value_selection].present? && @view[:custom_values].blank?
-      full_values = @view[:value_selection].join(" | ")
-    else
-      full_values = nil
-    end
-    submitter = @view[:slack_user_id]
-
-
-    # Build message
-    message_blocks = [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": ":#{emoji}: *#{headline}* :#{emoji}:\n#{users_list}"
-        }
-      },
-      {
-        "type": "divider"
-      }
-    ];
-    if full_values.present?
-      message_blocks.push(
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": "#{full_values}"
-        }
-      },
-      {
-        "type": "divider"
-      });
-    end
-    message_blocks.push(
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": "#{comments}"
-        }
-      },
-      {
-        "type": "divider"
-      },
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": "_Submitted by <@#{submitter}>_"
-        }
-      }
-    );
+    message = build_message(@view)
 
     # Post to Slack channel
-    PraiseBot.submit(message_blocks, @view)
+    PraiseBot.submit(message, @view)
   end
 
   # Delete a view if it exists
@@ -129,5 +67,78 @@ class PraiseMessage
 
     # return errors
     errors
+  end
+
+  def self.get_values(view)
+    case
+    when view.value_selection.present? && view.custom_values.present?
+      # Both selections + custom
+      "#{view.value_selection.join(" | ")} | #{view.custom_values}"
+    when view.value_selection.blank? && view.custom_values.present?
+      # Just custom
+      view.custom_values
+    when view.value_selection.present? && view.custom_values.blank?
+      # Just selections
+      view.value_selection.join(" | ")
+    else
+      nil
+    end
+  end
+
+  def self.build_message(view)
+    # Process values
+    headline = view.headline
+    comments = view.details
+    emoji = view.emoji
+    users_list = view.user_selection.join(", ")
+    value_list = get_values(view)
+    submitter = view.slack_user_id
+
+
+    # Build message
+    message_blocks = [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": ":#{emoji}: *#{headline}* :#{emoji}:\n#{users_list}"
+        }
+      },
+      {
+        "type": "divider"
+      }
+    ];
+    if value_list.present?
+      message_blocks.push(
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "#{value_list}"
+        }
+      },
+      {
+        "type": "divider"
+      });
+    end
+    message_blocks.push(
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "#{comments}"
+        }
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "_Submitted by <@#{submitter}>_"
+        }
+      }
+    );
   end
 end

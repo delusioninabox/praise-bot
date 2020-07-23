@@ -8,29 +8,12 @@ class ProcessValues
     # Loop through the values
     # Pull the field_name (action_id)
     # Then the value, based on type
-    values.each_with_object({}) do |object, map|
-      key = object[1].keys.first
-      field_name = key.gsub("-", "_").to_sym
-      action = object[1][key]
-      case
-      when action['type'] == 'multi_static_select' && action['selected_options'].present?
-        value = action['selected_options'].each_with_object([]) do |selection, array|
-          array << selection['value']
-        end
-      when action['type'] == 'static_select' && action['selected_option'].present?
-        value = action['selected_option']['value']
-      when action['type'] == 'multi_users_select' && action['selected_users'].present?
-        value = action['selected_users'].each_with_object([]) do |user, array|
-          array << "<@#{user}>"
-        end
-      when action['type'] == 'multi_external_select' && action['selected_options'].present?
-        value = action['selected_options'].each_with_object([]) do |user, array|
-          array << "#{user['value']}"
-        end
-      else # text input
-        value = action['value']
-      end
+    values.each_with_object({}) do |value_object, map|
+      key = value_object[1].keys.first
+      action = value_object[1][key]
+      value = get_value(action)
       if value.present?
+        field_name = key.to_s.gsub("-", "_").to_sym
         view.update_attributes({ field_name => value })
       end
     end
@@ -44,5 +27,44 @@ class ProcessValues
 
     # return updated View
     view
+  end
+
+  private
+
+  def self.is_multi_select?(action)
+    action[:type] == 'multi_static_select' && action[:selected_options].present?
+  end
+
+  def self.is_static_select?(action)
+    action[:type] == 'static_select' && action[:selected_option].present?
+  end
+
+  def self.is_user_select?(action)
+    action[:type] == 'multi_users_select' && action[:selected_users].present?
+  end
+
+  def self.is_external_select?(action)
+    action[:type] == 'multi_external_select' && action[:selected_options].present?
+  end
+
+  def self.get_value(action)
+    case
+    when is_multi_select?(action)
+      action[:selected_options].each_with_object([]) do |selection, array|
+        array << selection[:value]
+      end
+    when is_static_select?(action)
+      action[:selected_option][:value]
+    when is_user_select?(action)
+      action[:selected_users].each_with_object([]) do |user, array|
+        array << "<@#{user}>"
+      end
+    when is_external_select?(action)
+      action[:selected_options].each_with_object([]) do |user, array|
+        array << "#{user[:value]}"
+      end
+    else # text input
+      action[:value]
+    end
   end
 end

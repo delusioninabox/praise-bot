@@ -12,13 +12,13 @@ RSpec.describe PraiseMessage do
             "value": "Here is why they're great..."
           }
         }
-      }.as_json
+      }
     }
     let(:user) {
       {
         "id": "USER12345",
         "username": "Carol"
-      }.as_json
+      }
     }
     let(:view) { FactoryBot.create(:view, :valid_fields) }
     it("calls to submit message") do
