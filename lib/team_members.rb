@@ -23,9 +23,10 @@ class TeamMembers
         user.save
       }
 
-      if @data[:response_metadata][:next_cursor].present?
+      next_page = @data[:response_metadata][:next_cursor]
+      if next_page.present?
         # if next_cursor (page) exists
-        self.syncUsers(@data[:response_metadata][:next_cursor])
+        self.syncUsers(next_page)
       end
     end
   end

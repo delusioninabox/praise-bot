@@ -11,7 +11,7 @@ RSpec.describe ProcessValues do
             ]
           }
         }
-      }.as_json
+      }
     }
     let(:view) { FactoryBot.create(:view) }
     it("saves an array of users") do
@@ -32,7 +32,7 @@ RSpec.describe ProcessValues do
             }
           }
         }
-      }.as_json
+      }
     }
     let(:view) { FactoryBot.create(:view) }
     it("saves the single select value") do
@@ -54,7 +54,7 @@ RSpec.describe ProcessValues do
             ]
           }
         }
-      }.as_json
+      }
     }
     let(:view) { FactoryBot.create(:view) }
     it("saves the multiple select values") do
@@ -73,7 +73,7 @@ RSpec.describe ProcessValues do
             "value": "New Headline"
           }
         }
-      }.as_json
+      }
     }
     let(:view) { FactoryBot.create(:view) }
     it("saves the text value") do
