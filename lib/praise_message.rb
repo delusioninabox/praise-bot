@@ -11,7 +11,7 @@ class PraiseMessage
     @view = View.find_by({ view_id: view_id })
     if @view.nil?
       # If not, create one
-      @view = View.new({ view_id: view_id, slack_user_id: user['id'] })
+      @view = View.new({ view_id: view_id, slack_user_id: user[:id] })
     end
 
     # Process & save submitted values
