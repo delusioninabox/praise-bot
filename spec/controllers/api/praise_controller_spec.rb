@@ -19,6 +19,7 @@ RSpec.describe Api::PraiseController, type: :controller do
         },
         "view": {
           "id": "1",
+          "team_id": "teamABC123",
           "callback_id": "submit_praise",
           "state": {
             "values": [
@@ -42,6 +43,7 @@ RSpec.describe Api::PraiseController, type: :controller do
         },
         "view": {
           "id": "1",
+          "team_id": "teamABC123",
           "callback_id": "submit_praise"
         }
       }' }}
@@ -61,6 +63,7 @@ RSpec.describe Api::PraiseController, type: :controller do
       },
       "view": {
         "id": "VIEW2019",
+        "team_id": "teamABC123",
         "callback_id": "submit_praise",
         "state": {
           "values": {
@@ -109,6 +112,7 @@ RSpec.describe Api::PraiseController, type: :controller do
       },
       "view": {
         "id": "VIEW2019",
+        "team_id": "teamABC123",
         "callback_id": "submit_praise",
         "state": {
           "values": {
@@ -141,6 +145,92 @@ RSpec.describe Api::PraiseController, type: :controller do
       }
     }
     let!(:view) { FactoryBot.create(:view, :valid_fields, :self_selected) }
+    it("returns a error") do
+      post :create, :params => params
+      expect(response.body).to eq(error_list.to_json)
+    end
+  end
+
+  context "view_submission with plain text" do
+    let(:params) { { "payload": '{
+      "type": "view_submission",
+      "user": {
+        "id": "USER12345",
+        "username": "Bob"
+      },
+      "view": {
+        "id": "VIEW2019",
+        "team_id": "teamABC123",
+        "callback_id": "submit_praise",
+        "state": {
+          "values": {
+            "image-url-block": {
+              "image-url": {
+                "value": "this is not an image url"
+              }
+            }
+          }
+        }
+      }
+    }' }}
+    let(:user) {
+      {
+        "id": "USER12345",
+        "username": "Bob"
+      }.as_json
+    }
+    let(:error_list) {
+      {
+        "response_action": "errors",
+        "errors": {
+          "image-url-block": "Must be a URL for GIF, JPG or PNG image."
+        }
+      }
+    }
+    let!(:view) { FactoryBot.create(:view, :valid_fields) }
+    it("returns a error") do
+      post :create, :params => params
+      expect(response.body).to eq(error_list.to_json)
+    end
+  end
+
+  context "view_submission with wrong file type" do
+    let(:params) { { "payload": '{
+      "type": "view_submission",
+      "user": {
+        "id": "USER12345",
+        "username": "Bob"
+      },
+      "view": {
+        "id": "VIEW2019",
+        "team_id": "teamABC123",
+        "callback_id": "submit_praise",
+        "state": {
+          "values": {
+            "image-url-block": {
+              "image-url": {
+                "value": "http://something.com/giphy.bmp"
+              }
+            }
+          }
+        }
+      }
+    }' }}
+    let(:user) {
+      {
+        "id": "USER12345",
+        "username": "Bob"
+      }.as_json
+    }
+    let(:error_list) {
+      {
+        "response_action": "errors",
+        "errors": {
+          "image-url-block": "Must be a URL for GIF, JPG or PNG image."
+        }
+      }
+    }
+    let!(:view) { FactoryBot.create(:view, :valid_fields) }
     it("returns a error") do
       post :create, :params => params
       expect(response.body).to eq(error_list.to_json)

@@ -28,10 +28,18 @@ RSpec.describe PraiseMessage do
       expect(PraiseBot).to receive(:submit).with(
         [
           {
+            "type": "header",
+            "text": {
+              "type": "plain_text",
+              "text": ":tada: A new headline! :tada:",
+              "emoji": true
+            }
+          },
+          {
             "type": "section",
             "text": {
               "type": "mrkdwn",
-              "text": ":tada: *A new headline!* :tada:\n<@USER15>, <@USER20>"
+              "text": "<@USER15>, <@USER20>"
             }
           },
           {
@@ -67,10 +75,91 @@ RSpec.describe PraiseMessage do
         ],
         new_view
       ).once
-      subject.class.build(values, view.view_id, user)
+      subject.class.build(values, view.view_id, view.team_id, user)
       check_view = View.find_by({view_id: view.view_id})
       expect(check_view.headline).to eq("A new headline!")
       expect(check_view.details).to eq("Here is why they're great...")
+    end
+
+    context "and an image url" do
+      let(:values) {
+        {
+          "image-url-block": {
+            "image-url": {
+              "value": "https://media.giphy.com/media/sTczweWUTxLqg/giphy.gif"
+            }
+          }
+        }
+      }
+      let(:user) {
+        {
+          "id": "USER12345",
+          "username": "Carol"
+        }
+      }
+      let(:view) { FactoryBot.create(:view, :valid_fields) }
+      it("calls to submit message") do
+        new_view = view
+        new_view.image_url = "https://media.giphy.com/media/sTczweWUTxLqg/giphy.gif"
+        expect(PraiseBot).to receive(:submit).with(
+          [
+            {
+              "type": "header",
+              "text": {
+                "type": "plain_text",
+                "text": ":tada: Here is a headline! :tada:",
+                "emoji": true
+              }
+            },
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "<@USER15>, <@USER20>"
+              }
+            },
+            {
+              "type": "image",
+              "image_url": "https://media.giphy.com/media/sTczweWUTxLqg/giphy.gif",
+              "alt_text": "An image has been attached to this kudos!"
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": ":muscle: Courage"
+                    }
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "Here is some text and details..."
+                    }
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "_Submitted by <@USER12345>_"
+              }
+            }
+          ],
+          new_view
+        ).once
+        subject.class.build(values, view.view_id, view.team_id, user)
+        check_view = View.find_by({view_id: view.view_id})
+        expect(check_view.image_url).to eql("https://media.giphy.com/media/sTczweWUTxLqg/giphy.gif")
+      end
     end
 
     context "when no values selected but has custom value" do
@@ -79,10 +168,18 @@ RSpec.describe PraiseMessage do
         expect(PraiseBot).to receive(:submit).with(
           [
             {
+              "type": "header",
+              "text": {
+                "type": "plain_text",
+                "text": ":tada: A new headline! :tada:",
+                "emoji": true
+              }
+            },
+            {
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": ":tada: *A new headline!* :tada:\n<@USER15>, <@USER20>"
+                "text": "<@USER15>, <@USER20>"
               }
             },
             {
@@ -118,7 +215,7 @@ RSpec.describe PraiseMessage do
           ],
           no_value_view
         ).once
-        subject.class.build(values, view.view_id, user)
+        subject.class.build(values, view.view_id, view.team_id, user)
       end
     end
 
@@ -128,10 +225,18 @@ RSpec.describe PraiseMessage do
         expect(PraiseBot).to receive(:submit).with(
           [
             {
+              "type": "header",
+              "text": {
+                "type": "plain_text",
+                "text": ":tada: A new headline! :tada:",
+                "emoji": true
+              }
+            },
+            {
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": ":tada: *A new headline!* :tada:\n<@USER15>, <@USER20>"
+                "text": "<@USER15>, <@USER20>"
               }
             },
             {
@@ -157,7 +262,7 @@ RSpec.describe PraiseMessage do
           ],
           no_value_view
         ).once
-        subject.class.build(values, view.view_id, user)
+        subject.class.build(values, view.view_id, view.team_id, user)
       end
     end
   end

@@ -132,7 +132,7 @@ RSpec.describe TeamMembers do
     it 'retrieves and updates existing users' do
       first_response_body[:response_metadata][:next_cursor] = ""
       first_response_body[:members][0][:profile][:display_name] = "jeff"
-      FactoryBot.create(:user, slack_id: "W012A3CDE", display_name: "spengler", actual_name: "Egon Spengler")
+      FactoryBot.create(:user, slack_id: "W012A3CDE", team_id: "T012AB3C4", display_name: "spengler", actual_name: "Egon Spengler")
       first_response = instance_double(HTTParty::Response, body: first_response_body.to_json)
       second_response = instance_double(HTTParty::Response, body: second_response_body.to_json)
       allow(HTTParty).to receive(:get).
@@ -232,7 +232,7 @@ RSpec.describe TeamMembers do
 
     it 'retrieves and updates existing user groups' do
       group_response_body[:usergroups][0][:handle] = "theboss"
-      FactoryBot.create(:user, slack_id: "S0614TZR7", display_name: "admins", actual_name: "Team Admins")
+      FactoryBot.create(:user, slack_id: "S0614TZR7", team_id: "T060RNRCH", display_name: "admins", actual_name: "Team Admins")
       group_response = instance_double(HTTParty::Response, body: group_response_body.to_json)
       allow(HTTParty).to receive(:get).
         and_return(group_response)

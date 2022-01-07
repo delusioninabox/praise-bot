@@ -59,14 +59,14 @@ class PraiseMessage
       errors << { key: "details-block", message: "More information is required. Be specific about what they did, when, and why it's awesome!" }
     end
     if view.image_url.present? && !view.image_url.match(%r{.(gif|jpg|png)\Z}i)
-      errors << { key: "image-block", message: "Must be a URL for GIF, JPG or PNG image." }
+      errors << { key: "image-url-block", message: "Must be a URL for GIF, JPG or PNG image." }
     end
     if view.user_selection.blank?
       errors << { key: "user-block", message: "You need to select at least one user to praise." }
     end
-    # if view.user_selection.present? && view.user_selection.include?("<@#{view.slack_user_id}>")
-    #   errors << { key: "user-block", message: "You can't praise yourself! :)" }
-    # end
+    if view.user_selection.present? && view.user_selection.include?("<@#{view.slack_user_id}>")
+      errors << { key: "user-block", message: "You can't praise yourself! :)" }
+    end
 
     # return errors
     errors
@@ -115,21 +115,22 @@ class PraiseMessage
           "type": "mrkdwn",
           "text": "#{users_list}"
         }
-      },
-      {
-        "type": "divider"
       }
     ];
     if image_url.present?
       message_blocks.push(
         {
           "type": "image",
-          "block_id": "image4",
           "image_url": "#{image_url}",
           "alt_text": "An image has been attached to this kudos!"
         }
       )
     end
+    message_blocks.push(
+      {
+        "type": "divider"
+      }
+    )
     if value_list.present?
       message_blocks.push(
       {

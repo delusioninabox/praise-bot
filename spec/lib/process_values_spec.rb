@@ -82,4 +82,23 @@ RSpec.describe ProcessValues do
       expect(updated_view.headline).to eq("New Headline")
     end
   end
+
+  context "sending image url input" do
+    let(:actions) {
+      {
+        "image-url-block": {
+          "image-url": {
+            "type": "plain_text_input",
+            "value": "https://media.giphy.com/media/gw3IWyGkC0rsazTi/giphy.gif"
+          }
+        }
+      }
+    }
+    let(:view) { FactoryBot.create(:view) }
+    it("saves the text value") do
+      subject.class.save(actions, view)
+      updated_view = View.find_by({ view_id: view.view_id })
+      expect(updated_view.image_url).to eq("https://media.giphy.com/media/gw3IWyGkC0rsazTi/giphy.gif")
+    end
+  end
 end
