@@ -222,6 +222,28 @@
     },
     {
       "type": "input",
+      "optional": true,
+      "block_id": "image-url-block",
+      "element": {
+        "action_id": "image-url",
+        "type": "plain_text_input",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "http://giphy.url.com/your-gif.gif"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Image URL",
+        "emoji": true
+      },
+      "hint": {
+        "type": "plain_text",
+        "text": "Attach a link to a GIF, PNG, or JPG image!"
+      }
+    },
+    {
+      "type": "input",
       "block_id": "details-block",
       "element": {
         "type": "plain_text_input",

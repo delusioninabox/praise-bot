@@ -19,7 +19,7 @@ class Api::PraiseController < ApplicationController
     when user_submitted?
       # User hit "submit"
       # PraiseMessage.build to return error object
-      errors = PraiseMessage.build(model_state, view_id, user)
+      errors = PraiseMessage.build(model_state, view_id, team_id, user)
       if !errors.blank?
         log_errors(errors)
       else
@@ -62,6 +62,10 @@ class Api::PraiseController < ApplicationController
 
   def view_id
     @view_id ||= view[:id]
+  end
+
+  def team_id
+    @team_id ||= view[:team_id]
   end
 
   def model_state

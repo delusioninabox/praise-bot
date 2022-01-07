@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :view do
     slack_user_id { "USER12345" }
+    team_id { "teamABC123" }
     view_id { "VIEW2019" }
     posted { false }
 
