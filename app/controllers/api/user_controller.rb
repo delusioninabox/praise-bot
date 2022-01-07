@@ -45,11 +45,15 @@ class Api::UserController < ApplicationController
     end
   end
 
+  def team_id
+    @team_id ||= payload[:view][:team_id]
+  end
+
   def user_list
     if search.present?
-      User.where(is_deleted: false).where("display_name ILIKE '%#{search}%' OR actual_name ILIKE '%#{search}%'").order('display_name asc')
+      User.where(is_deleted: false, team_id: team_id).where("display_name ILIKE '%#{search}%' OR actual_name ILIKE '%#{search}%'").order('display_name asc')
     else
-      User.all.where(is_deleted: false).order('display_name asc')
+      User.all.where(is_deleted: false, team_id: team_id).order('display_name asc')
     end
   end
 

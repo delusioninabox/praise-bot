@@ -3,15 +3,15 @@ require 'praise_bot'
 class PraiseMessage
 
   # Validate submission
-  def self.build(values, view_id, user)
+  def self.build(values, view_id, team_id, user)
     Rails.logger.info("View submitted by #{user[:username]}")
 
     # Do we have the view?
     # We should b/c of required dropdowns
-    @view = View.find_by({ view_id: view_id })
+    @view = View.find_by({ view_id: view_id, team_id: team_id })
     if @view.nil?
       # If not, create one
-      @view = View.new({ view_id: view_id, slack_user_id: user[:id] })
+      @view = View.new({ view_id: view_id, team_id: team_id, slack_user_id: user[:id] })
     end
 
     # Process & save submitted values
@@ -58,12 +58,15 @@ class PraiseMessage
     if view.details.blank?
       errors << { key: "details-block", message: "More information is required. Be specific about what they did, when, and why it's awesome!" }
     end
+    if view.image_url.present? && !view.image_url.match(%r{.(gif|jpg|png)\Z}i)
+      errors << { key: "image-block", message: "Must be a URL for GIF, JPG or PNG image." }
+    end
     if view.user_selection.blank?
       errors << { key: "user-block", message: "You need to select at least one user to praise." }
     end
-    if view.user_selection.present? && view.user_selection.include?("<@#{view.slack_user_id}>")
-      errors << { key: "user-block", message: "You can't praise yourself! :)" }
-    end
+    # if view.user_selection.present? && view.user_selection.include?("<@#{view.slack_user_id}>")
+    #   errors << { key: "user-block", message: "You can't praise yourself! :)" }
+    # end
 
     # return errors
     errors
@@ -90,6 +93,7 @@ class PraiseMessage
     headline = view.headline
     comments = view.details
     emoji = view.emoji
+    image_url = view.image_url
     users_list = view.user_selection.join(", ")
     value_list = get_values(view)
     submitter = view.slack_user_id
@@ -98,16 +102,34 @@ class PraiseMessage
     # Build message
     message_blocks = [
       {
+        "type": "header",
+        "text": {
+          "type": "plain_text",
+          "text": ":#{emoji}: #{headline} :#{emoji}:",
+          "emoji": true
+        }
+      },
+      {
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": ":#{emoji}: *#{headline}* :#{emoji}:\n#{users_list}"
+          "text": "#{users_list}"
         }
       },
       {
         "type": "divider"
       }
     ];
+    if image_url.present?
+      message_blocks.push(
+        {
+          "type": "image",
+          "block_id": "image4",
+          "image_url": "#{image_url}",
+          "alt_text": "An image has been attached to this kudos!"
+        }
+      )
+    end
     if value_list.present?
       message_blocks.push(
       {

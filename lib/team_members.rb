@@ -9,7 +9,7 @@ class TeamMembers
 
     if @data[:members].present?
       @data[:members].map { |item|
-        user = User.where(slack_id: item[:id]).first_or_initialize
+        user = User.where(slack_id: item[:id], team_id: item[:team_id]).first_or_initialize
         name = item[:profile][:display_name]
         if name.empty?
           name = item[:name]
@@ -38,7 +38,7 @@ class TeamMembers
 
     if @data[:usergroups].present?
       @data[:usergroups].map { |item|
-        user = User.where(slack_id: item[:id]).first_or_initialize
+        user = User.where(slack_id: item[:id], team_id: item[:team_id]).first_or_initialize
         user.assign_attributes({
           display_name: item[:handle],
           actual_name: item[:name],

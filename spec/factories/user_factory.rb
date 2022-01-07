@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :user do
     slack_id { Faker::Alphanumeric.alpha(number: 10) }
+    team_id { "teamABC123" }
     display_name { Faker::Twitter.screen_name }
     actual_name { Faker::Name.name }
     is_group { false }

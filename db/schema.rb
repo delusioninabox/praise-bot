@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_170525) do
+ActiveRecord::Schema.define(version: 2022_01_07_165806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_170525) do
     t.string "actual_name"
     t.boolean "is_group"
     t.boolean "is_deleted", default: false
+    t.string "team_id"
     t.index ["slack_id"], name: "index_users_on_slack_id", unique: true
   end
 
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_170525) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "custom_values"
+    t.string "image_url"
   end
 
 end
